@@ -1,6 +1,6 @@
 {
   "num_samples": 200,
-  "total_time_sec": 311.15923619270325,
-  "avg_time_per_sample_sec": 1.5557961809635161,
+  "total_time_sec": 225.16822719573975,
+  "avg_time_per_sample_sec": 1.1258411359786988,
   "samples_file": "outputs/eagleT0.7_vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_completions.jsonl"
 }

@@ -1,0 +1,6 @@
+{
+  "num_samples": 200,
+  "total_time_sec": 674.4329116344452,
+  "avg_time_per_sample_sec": 3.372164558172226,
+  "samples_file": "outputs/vicunaT0.7_vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_completions.jsonl"
+}

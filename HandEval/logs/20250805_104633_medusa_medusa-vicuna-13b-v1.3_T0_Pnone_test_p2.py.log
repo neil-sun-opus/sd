@@ -1,0 +1,222 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.54s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.54s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.29s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.36s/it]
+Some weights of MedusaModelLlama were not initialized from the model checkpoint at /home/ubuntu/sd/model_ckpt/vicuna-13b-v1.3 and are newly initialized: ['medusa_head.0.0.linear.bias', 'medusa_head.0.0.linear.weight', 'medusa_head.0.1.weight', 'medusa_head.1.0.linear.bias', 'medusa_head.1.0.linear.weight', 'medusa_head.1.1.weight', 'medusa_head.2.0.linear.bias', 'medusa_head.2.0.linear.weight', 'medusa_head.2.1.weight', 'medusa_head.3.0.linear.bias', 'medusa_head.3.0.linear.weight', 'medusa_head.3.1.weight', 'medusa_head.4.0.linear.bias', 'medusa_head.4.0.linear.weight', 'medusa_head.4.1.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/ubuntu/sd/Medusa/medusa/model/medusa_model.py:156: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  medusa_head_state_dict = torch.load(filename, map_location=model.device)
+Dataset: data-is-better-together/10k_prompts_ranked:   0%|          | 0/200 [00:00<?, ?it/s]Dataset: data-is-better-together/10k_prompts_ranked:   0%|          | 1/200 [00:05<17:38,  5.32s/it]Dataset: data-is-better-together/10k_prompts_ranked:   1%|          | 2/200 [00:11<18:37,  5.65s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▏         | 3/200 [00:17<18:53,  5.76s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▏         | 4/200 [00:20<15:15,  4.67s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▎         | 5/200 [00:20<10:08,  3.12s/it]Dataset: data-is-better-together/10k_prompts_ranked:   3%|▎         | 6/200 [00:25<11:57,  3.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▎         | 7/200 [00:28<11:14,  3.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▍         | 8/200 [00:29<08:53,  2.78s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▍         | 9/200 [00:34<11:23,  3.58s/it]Dataset: data-is-better-together/10k_prompts_ranked:   5%|▌         | 10/200 [00:37<10:45,  3.40s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▌         | 11/200 [00:43<13:06,  4.16s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▌         | 12/200 [00:44<09:28,  3.02s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▋         | 13/200 [00:46<08:30,  2.73s/it]Dataset: data-is-better-together/10k_prompts_ranked:   7%|▋         | 14/200 [00:49<08:56,  2.88s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 15/200 [00:55<11:53,  3.86s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 16/200 [01:01<13:26,  4.38s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 17/200 [01:06<13:57,  4.58s/it]Dataset: data-is-better-together/10k_prompts_ranked:   9%|▉         | 18/200 [01:07<10:53,  3.59s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|▉         | 19/200 [01:09<09:37,  3.19s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|█         | 20/200 [01:10<07:33,  2.52s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|█         | 21/200 [01:13<07:34,  2.54s/it]Dataset: data-is-better-together/10k_prompts_ranked:  11%|█         | 22/200 [01:15<07:23,  2.49s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▏        | 23/200 [01:19<08:01,  2.72s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▏        | 24/200 [01:24<10:09,  3.46s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▎        | 25/200 [01:26<08:43,  2.99s/it]Dataset: data-is-better-together/10k_prompts_ranked:  13%|█▎        | 26/200 [01:31<11:11,  3.86s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▎        | 27/200 [01:34<09:33,  3.31s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▍        | 28/200 [01:36<08:43,  3.04s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▍        | 29/200 [01:39<08:50,  3.10s/it]Dataset: data-is-better-together/10k_prompts_ranked:  15%|█▌        | 30/200 [01:40<07:14,  2.56s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▌        | 31/200 [01:43<06:51,  2.44s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▌        | 32/200 [01:48<09:43,  3.47s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▋        | 33/200 [01:53<10:18,  3.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  17%|█▋        | 34/200 [01:56<09:35,  3.47s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 35/200 [02:00<10:22,  3.77s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 36/200 [02:04<10:37,  3.89s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 37/200 [02:08<10:02,  3.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  19%|█▉        | 38/200 [02:13<11:48,  4.37s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|█▉        | 39/200 [02:15<09:03,  3.38s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|██        | 40/200 [02:17<08:13,  3.08s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|██        | 41/200 [02:18<06:21,  2.40s/it]Dataset: data-is-better-together/10k_prompts_ranked:  21%|██        | 42/200 [02:22<07:29,  2.85s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▏       | 43/200 [02:23<06:15,  2.39s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▏       | 44/200 [02:26<06:45,  2.60s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▎       | 45/200 [02:28<06:12,  2.40s/it]Dataset: data-is-better-together/10k_prompts_ranked:  23%|██▎       | 46/200 [02:29<05:19,  2.07s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▎       | 47/200 [02:30<04:10,  1.63s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▍       | 48/200 [02:30<03:09,  1.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▍       | 49/200 [02:32<03:34,  1.42s/it]Dataset: data-is-better-together/10k_prompts_ranked:  25%|██▌       | 50/200 [02:36<05:18,  2.13s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▌       | 51/200 [02:42<08:05,  3.26s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▌       | 52/200 [02:47<09:15,  3.75s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▋       | 53/200 [02:48<07:25,  3.03s/it]Dataset: data-is-better-together/10k_prompts_ranked:  27%|██▋       | 54/200 [02:49<05:39,  2.33s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 55/200 [02:49<04:07,  1.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 56/200 [02:50<03:34,  1.49s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 57/200 [02:52<04:02,  1.69s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|██▉       | 59/200 [02:55<03:53,  1.65s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|███       | 60/200 [03:01<06:18,  2.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|███       | 61/200 [03:02<05:24,  2.33s/it]Dataset: data-is-better-together/10k_prompts_ranked:  31%|███       | 62/200 [03:07<06:49,  2.97s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▏      | 63/200 [03:11<07:23,  3.23s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▏      | 64/200 [03:12<05:54,  2.61s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▎      | 65/200 [03:15<05:57,  2.65s/it]Dataset: data-is-better-together/10k_prompts_ranked:  33%|███▎      | 66/200 [03:17<05:49,  2.61s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▎      | 67/200 [03:20<05:51,  2.64s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▍      | 68/200 [03:22<05:34,  2.53s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▍      | 69/200 [03:23<04:10,  1.91s/it]Dataset: data-is-better-together/10k_prompts_ranked:  35%|███▌      | 70/200 [03:23<03:10,  1.46s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▌      | 71/200 [03:23<02:21,  1.10s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▌      | 72/200 [03:26<03:21,  1.58s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▋      | 73/200 [03:28<03:45,  1.78s/it]Dataset: data-is-better-together/10k_prompts_ranked:  37%|███▋      | 74/200 [03:31<04:27,  2.12s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 75/200 [03:37<06:47,  3.26s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 76/200 [03:43<08:22,  4.05s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 77/200 [03:46<07:34,  3.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  39%|███▉      | 78/200 [03:47<05:56,  2.92s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|███▉      | 79/200 [03:51<06:32,  3.24s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|████      | 80/200 [03:55<06:36,  3.31s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|████      | 81/200 [03:59<07:09,  3.61s/it]Dataset: data-is-better-together/10k_prompts_ranked:  41%|████      | 82/200 [04:01<06:22,  3.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▏     | 83/200 [04:02<04:52,  2.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▏     | 84/200 [04:05<05:11,  2.69s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▎     | 85/200 [04:09<05:32,  2.89s/it]Dataset: data-is-better-together/10k_prompts_ranked:  43%|████▎     | 86/200 [04:12<05:32,  2.92s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▎     | 87/200 [04:16<06:38,  3.53s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▍     | 88/200 [04:18<05:12,  2.79s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▍     | 89/200 [04:23<06:51,  3.71s/it]Dataset: data-is-better-together/10k_prompts_ranked:  45%|████▌     | 90/200 [04:29<08:01,  4.38s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▌     | 91/200 [04:30<05:47,  3.19s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▌     | 92/200 [04:32<05:16,  2.93s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▋     | 93/200 [04:34<04:52,  2.73s/it]Dataset: data-is-better-together/10k_prompts_ranked:  47%|████▋     | 94/200 [04:37<04:47,  2.72s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 95/200 [04:42<05:44,  3.28s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 96/200 [04:45<05:48,  3.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 97/200 [04:47<05:04,  2.95s/it]Dataset: data-is-better-together/10k_prompts_ranked:  49%|████▉     | 98/200 [04:52<06:05,  3.59s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|████▉     | 99/200 [04:55<05:37,  3.34s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|█████     | 100/200 [04:55<03:58,  2.38s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|█████     | 101/200 [04:59<04:26,  2.69s/it]Dataset: data-is-better-together/10k_prompts_ranked:  51%|█████     | 102/200 [05:02<04:35,  2.81s/it]Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▏    | 103/200 [05:04<04:11,  2.59s/it]Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▏    | 104/200 [05:09<05:39,  3.54s/it]Token indices sequence length is longer than the specified maximum sequence length for this model (3654 > 2048). Running this sequence through the model will result in indexing errors
+Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▎    | 105/200 [05:10<04:14,  2.68s/it]Dataset: data-is-better-together/10k_prompts_ranked:  53%|█████▎    | 106/200 [05:15<05:26,  3.47s/it]Dataset: data-is-better-together/10k_prompts_ranked:  54%|█████▎    | 107/200 [05:21<06:31,  4.21s/it]Dataset: data-is-better-together/10k_prompts_ranked:  54%|█████▍    | 108/200 [05:25<05:59,  3.91s/it]Dataset: data-is-better-together/10k_prompts_ranked:  55%|█████▍    | 109/200 [05:25<04:32,  2.99s/it]Dataset: data-is-better-together/10k_prompts_ranked:  55%|█████▌    | 110/200 [05:31<05:48,  3.87s/it]Dataset: data-is-better-together/10k_prompts_ranked:  56%|█████▌    | 111/200 [05:35<05:35,  3.77s/it]Dataset: data-is-better-together/10k_prompts_ranked:  56%|█████▌    | 112/200 [05:37<04:43,  3.22s/it]Dataset: data-is-better-together/10k_prompts_ranked:  56%|█████▋    | 113/200 [05:40<04:47,  3.31s/it]Dataset: data-is-better-together/10k_prompts_ranked:  57%|█████▋    | 114/200 [05:41<03:37,  2.52s/it]Dataset: data-is-better-together/10k_prompts_ranked:  57%|█████▊    | 115/200 [05:42<02:48,  1.99s/it]Dataset: data-is-better-together/10k_prompts_ranked:  58%|█████▊    | 116/200 [05:42<02:02,  1.45s/it]Dataset: data-is-better-together/10k_prompts_ranked:  58%|█████▊    | 117/200 [05:43<01:44,  1.26s/it]Dataset: data-is-better-together/10k_prompts_ranked:  59%|█████▉    | 118/200 [05:44<01:29,  1.09s/it]Dataset: data-is-better-together/10k_prompts_ranked:  60%|█████▉    | 119/200 [05:49<03:25,  2.54s/it]Dataset: data-is-better-together/10k_prompts_ranked:  60%|██████    | 120/200 [05:52<03:34,  2.68s/it]Dataset: data-is-better-together/10k_prompts_ranked:  60%|██████    | 121/200 [05:56<03:47,  2.87s/it]Dataset: data-is-better-together/10k_prompts_ranked:  61%|██████    | 122/200 [05:58<03:19,  2.55s/it]Dataset: data-is-better-together/10k_prompts_ranked:  62%|██████▏   | 123/200 [06:01<03:41,  2.88s/it]Dataset: data-is-better-together/10k_prompts_ranked:  62%|██████▏   | 124/200 [06:02<02:58,  2.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  62%|██████▎   | 125/200 [06:03<02:12,  1.77s/it]Dataset: data-is-better-together/10k_prompts_ranked:  63%|██████▎   | 126/200 [06:03<01:42,  1.39s/it]Dataset: data-is-better-together/10k_prompts_ranked:  64%|██████▎   | 127/200 [06:09<03:19,  2.74s/it]Dataset: data-is-better-together/10k_prompts_ranked:  64%|██████▍   | 128/200 [06:09<02:20,  1.95s/it]Dataset: data-is-better-together/10k_prompts_ranked:  64%|██████▍   | 129/200 [06:12<02:35,  2.18s/it]Dataset: data-is-better-together/10k_prompts_ranked:  65%|██████▌   | 130/200 [06:14<02:32,  2.18s/it]Dataset: data-is-better-together/10k_prompts_ranked:  66%|██████▌   | 131/200 [06:17<02:47,  2.43s/it]Dataset: data-is-better-together/10k_prompts_ranked:  66%|██████▌   | 132/200 [06:19<02:31,  2.22s/it]Dataset: data-is-better-together/10k_prompts_ranked:  66%|██████▋   | 133/200 [06:20<02:05,  1.88s/it]Dataset: data-is-better-together/10k_prompts_ranked:  67%|██████▋   | 134/200 [06:20<01:33,  1.42s/it]Dataset: data-is-better-together/10k_prompts_ranked:  68%|██████▊   | 135/200 [06:21<01:11,  1.10s/it]Dataset: data-is-better-together/10k_prompts_ranked:  68%|██████▊   | 136/200 [06:21<00:55,  1.15it/s]Dataset: data-is-better-together/10k_prompts_ranked:  68%|██████▊   | 137/200 [06:23<01:09,  1.10s/it]Dataset: data-is-better-together/10k_prompts_ranked:  69%|██████▉   | 138/200 [06:26<01:44,  1.69s/it]Dataset: data-is-better-together/10k_prompts_ranked:  70%|██████▉   | 139/200 [06:32<03:00,  2.96s/it]Dataset: data-is-better-together/10k_prompts_ranked:  70%|███████   | 140/200 [06:34<02:52,  2.87s/it]Dataset: data-is-better-together/10k_prompts_ranked:  70%|███████   | 141/200 [06:37<02:45,  2.81s/it]Dataset: data-is-better-together/10k_prompts_ranked:  71%|███████   | 142/200 [06:39<02:33,  2.65s/it]Dataset: data-is-better-together/10k_prompts_ranked:  72%|███████▏  | 143/200 [06:40<02:03,  2.16s/it]Dataset: data-is-better-together/10k_prompts_ranked:  72%|███████▏  | 144/200 [06:40<01:27,  1.57s/it]Dataset: data-is-better-together/10k_prompts_ranked:  72%|███████▎  | 145/200 [06:44<01:50,  2.01s/it]Average accept_length after 212 steps : 1.3584905862808228
+Average accept_length after 256 steps : 1.59375
+Average accept_length after 256 steps : 0.9453125
+Average accept_length after 132 steps : 1.2878788709640503
+Average accept_length after 15 steps : 2.3333334922790527
+Average accept_length after 204 steps : 1.2696079015731812
+Average accept_length after 133 steps : 1.7443609237670898
+Average accept_length after 54 steps : 1.2592592239379883
+Average accept_length after 231 steps : 1.9567099809646606
+Average accept_length after 131 steps : 2.396946668624878
+Average accept_length after 256 steps : 1.390625
+Average accept_length after 18 steps : 1.0555555820465088
+Average accept_length after 90 steps : 0.9333333373069763
+Average accept_length after 142 steps : 1.8873238563537598
+Average accept_length after 256 steps : 1.40234375
+Average accept_length after 243 steps : 1.0823044776916504
+Average accept_length after 218 steps : 1.6422017812728882
+Average accept_length after 56 steps : 1.4642857313156128
+Average accept_length after 77 steps : 1.051948070526123
+Average accept_length after 41 steps : 1.2926828861236572
+Average accept_length after 113 steps : 1.2389380931854248
+Average accept_length after 104 steps : 1.692307710647583
+Average accept_length after 142 steps : 1.4577465057373047
+Average accept_length after 228 steps : 1.2324562072753906
+Average accept_length after 83 steps : 1.7469879388809204
+Average accept_length after 256 steps : 1.6640625
+Average accept_length after 89 steps : 2.3258426189422607
+Average accept_length after 106 steps : 1.5188679695129395
+Average accept_length after 141 steps : 1.432624101638794
+Average accept_length after 56 steps : 1.6071429252624512
+Average accept_length after 93 steps : 1.3440860509872437
+Average accept_length after 256 steps : 1.2734375
+Average accept_length after 184 steps : 1.5271739959716797
+Average accept_length after 127 steps : 2.0944881439208984
+Average accept_length after 191 steps : 1.6439790725708008
+Average accept_length after 181 steps : 1.4640884399414062
+Average accept_length after 142 steps : 1.8450703620910645
+Average accept_length after 256 steps : 1.6953125
+Average accept_length after 46 steps : 0.6304348111152649
+Average accept_length after 104 steps : 1.769230842590332
+Average accept_length after 35 steps : 1.399999976158142
+Average accept_length after 168 steps : 1.2023810148239136
+Average accept_length after 58 steps : 1.017241358757019
+Average accept_length after 134 steps : 1.3805969953536987
+Average accept_length after 84 steps : 2.6666667461395264
+Average accept_length after 56 steps : 2.3214287757873535
+Average accept_length after 26 steps : 1.461538553237915
+Average accept_length after 14 steps : 1.9285714626312256
+Average accept_length after 79 steps : 2.0
+Average accept_length after 165 steps : 1.618181824684143
+Average accept_length after 256 steps : 1.2890625
+Average accept_length after 213 steps : 2.2816901206970215
+Average accept_length after 58 steps : 1.2586207389831543
+Average accept_length after 30 steps : 1.8000000715255737
+Average accept_length after 10 steps : 1.0
+Average accept_length after 43 steps : 1.8604650497436523
+Average accept_length after 95 steps : 1.2947368621826172
+Average accept_length after 3 steps : 0.0
+Average accept_length after 135 steps : 1.3333332538604736
+Average accept_length after 256 steps : 0.984375
+Average accept_length after 56 steps : 2.0535714626312256
+Average accept_length after 205 steps : 1.0634146928787231
+Average accept_length after 171 steps : 1.286549687385559
+Average accept_length after 44 steps : 2.0227272510528564
+Average accept_length after 119 steps : 1.3697479963302612
+Average accept_length after 93 steps : 1.2688171863555908
+Average accept_length after 117 steps : 1.9743590354919434
+Average accept_length after 99 steps : 2.2121212482452393
+Average accept_length after 19 steps : 1.3684210777282715
+Average accept_length after 17 steps : 1.2352941036224365
+Average accept_length after 9 steps : 2.222222328186035
+Average accept_length after 117 steps : 1.4957265853881836
+Average accept_length after 98 steps : 1.5306122303009033
+Average accept_length after 126 steps : 1.5555557012557983
+Average accept_length after 256 steps : 1.5078125
+Average accept_length after 256 steps : 1.74609375
+Average accept_length after 125 steps : 1.5440000295639038
+Average accept_length after 48 steps : 1.25
+Average accept_length after 174 steps : 1.471264362335205
+Average accept_length after 149 steps : 1.8926174640655518
+Average accept_length after 187 steps : 1.4064171314239502
+Average accept_length after 104 steps : 1.125
+Average accept_length after 33 steps : 1.7272727489471436
+Average accept_length after 135 steps : 1.4074074029922485
+Average accept_length after 147 steps : 1.428571343421936
+Average accept_length after 128 steps : 2.0234375
+Average accept_length after 213 steps : 1.751173734664917
+Average accept_length after 46 steps : 1.7826087474822998
+Average accept_length after 254 steps : 1.4291338920593262
+Average accept_length after 256 steps : 1.89453125
+Average accept_length after 17 steps : 2.058823585510254
+Average accept_length after 100 steps : 1.399999976158142
+Average accept_length after 99 steps : 1.9191919565200806
+Average accept_length after 117 steps : 1.5982906818389893
+Average accept_length after 198 steps : 1.545454502105713
+Average accept_length after 154 steps : 0.9870129823684692
+Average accept_length after 88 steps : 1.2840909957885742
+Average accept_length after 220 steps : 1.6818181276321411
+Average accept_length after 121 steps : 1.2892560958862305
+Average accept_length after 5 steps : 1.2000000476837158
+Average accept_length after 149 steps : 1.7651007175445557
+Average accept_length after 133 steps : 1.3082706928253174
+Average accept_length after 90 steps : 1.4111111164093018
+Average accept_length after 247 steps : 1.6639676094055176
+Average accept_length after 1 steps : 1.0
+Average accept_length after 229 steps : 1.6855895519256592
+Average accept_length after 252 steps : 0.9365079998970032
+Average accept_length after 139 steps : 1.4820144176483154
+Average accept_length after 36 steps : 1.75
+Average accept_length after 256 steps : 1.27734375
+Average accept_length after 155 steps : 1.5935484170913696
+Average accept_length after 83 steps : 1.7710843086242676
+Average accept_length after 152 steps : 1.1315789222717285
+Average accept_length after 30 steps : 1.3333333730697632
+Average accept_length after 31 steps : 0.774193525314331
+Average accept_length after 8 steps : 1.75
+Average accept_length after 35 steps : 1.485714316368103
+Average accept_length after 29 steps : 1.482758641242981
+Average accept_length after 256 steps : 1.91796875
+Average accept_length after 131 steps : 1.7786259651184082
+Average accept_length after 144 steps : 1.8819444179534912
+Average accept_length after 78 steps : 1.6666667461395264
+Average accept_length after 158 steps : 1.4556962251663208
+Average accept_length after 48 steps : 1.1666667461395264
+Average accept_length after 18 steps : 1.1666666269302368
+Average accept_length after 21 steps : 2.3333334922790527
+Average accept_length after 256 steps : 1.6953125
+Average accept_length after 4 steps : 2.25
+Average accept_length after 119 steps : 1.4369748830795288
+Average accept_length after 94 steps : 1.563829779624939
+Average accept_length after 131 steps : 1.9389313459396362
+Average accept_length after 76 steps : 1.644736886024475
+Average accept_length after 46 steps : 1.3695652484893799
+Average accept_length after 15 steps : 2.266666889190674
+Average accept_length after 15 steps : 1.4000000953674316
+Average accept_length after 14 steps : 0.785714328289032
+Average accept_length after 71 steps : 1.4788732528686523
+Average accept_length after 133 steps : 1.609022617340088
+Average accept_length after 256 steps : 1.34765625
+Average accept_length after 116 steps : 1.1810344457626343
+Average accept_length after 116 steps : 2.155172348022461
+Average accept_length after 100 steps : 1.6299999952316284
+Average accept_length after 43 steps : 1.5813953876495361
+Average accept_length after 7 steps : 1.8571429252624512
+Average accept_length after 131 steps : 1.694656491279602
+Dataset: data-is-better-together/10k_prompts_ranked:  73%|███████▎  | 146/200 [06:44<01:19,  1.48s/it]Dataset: data-is-better-together/10k_prompts_ranked:  74%|███████▎  | 147/200 [06:48<01:57,  2.22s/it]Dataset: data-is-better-together/10k_prompts_ranked:  74%|███████▍  | 148/200 [06:54<02:53,  3.33s/it]Dataset: data-is-better-together/10k_prompts_ranked:  74%|███████▍  | 149/200 [06:56<02:39,  3.12s/it]Dataset: data-is-better-together/10k_prompts_ranked:  75%|███████▌  | 150/200 [06:57<02:00,  2.41s/it]Dataset: data-is-better-together/10k_prompts_ranked:  76%|███████▌  | 151/200 [06:59<01:50,  2.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  76%|███████▌  | 152/200 [07:01<01:53,  2.36s/it]Dataset: data-is-better-together/10k_prompts_ranked:  76%|███████▋  | 153/200 [07:03<01:32,  1.97s/it]Dataset: data-is-better-together/10k_prompts_ranked:  77%|███████▋  | 154/200 [07:08<02:24,  3.15s/it]Dataset: data-is-better-together/10k_prompts_ranked:  78%|███████▊  | 155/200 [07:09<01:40,  2.24s/it]Dataset: data-is-better-together/10k_prompts_ranked:  78%|███████▊  | 156/200 [07:14<02:27,  3.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  78%|███████▊  | 157/200 [07:18<02:22,  3.31s/it]Dataset: data-is-better-together/10k_prompts_ranked:  79%|███████▉  | 158/200 [07:21<02:13,  3.19s/it]Dataset: data-is-better-together/10k_prompts_ranked:  80%|███████▉  | 159/200 [07:22<01:47,  2.62s/it]Dataset: data-is-better-together/10k_prompts_ranked:  80%|████████  | 160/200 [07:25<01:44,  2.61s/it]Dataset: data-is-better-together/10k_prompts_ranked:  80%|████████  | 161/200 [07:26<01:28,  2.26s/it]Dataset: data-is-better-together/10k_prompts_ranked:  81%|████████  | 162/200 [07:32<02:08,  3.37s/it]Dataset: data-is-better-together/10k_prompts_ranked:  82%|████████▏ | 163/200 [07:33<01:36,  2.62s/it]Dataset: data-is-better-together/10k_prompts_ranked:  82%|████████▏ | 164/200 [07:35<01:29,  2.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  82%|████████▎ | 165/200 [07:39<01:41,  2.90s/it]Dataset: data-is-better-together/10k_prompts_ranked:  83%|████████▎ | 166/200 [07:42<01:39,  2.93s/it]Dataset: data-is-better-together/10k_prompts_ranked:  84%|████████▎ | 167/200 [07:48<02:05,  3.81s/it]Dataset: data-is-better-together/10k_prompts_ranked:  84%|████████▍ | 168/200 [07:50<01:50,  3.45s/it]Dataset: data-is-better-together/10k_prompts_ranked:  84%|████████▍ | 169/200 [07:53<01:40,  3.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  85%|████████▌ | 170/200 [07:55<01:22,  2.74s/it]Dataset: data-is-better-together/10k_prompts_ranked:  86%|████████▌ | 171/200 [08:00<01:41,  3.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  86%|████████▌ | 172/200 [08:04<01:39,  3.55s/it]Dataset: data-is-better-together/10k_prompts_ranked:  86%|████████▋ | 173/200 [08:06<01:30,  3.36s/it]Dataset: data-is-better-together/10k_prompts_ranked:  87%|████████▋ | 174/200 [08:09<01:20,  3.09s/it]Dataset: data-is-better-together/10k_prompts_ranked:  88%|████████▊ | 175/200 [08:13<01:23,  3.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  88%|████████▊ | 176/200 [08:18<01:35,  3.97s/it]Dataset: data-is-better-together/10k_prompts_ranked:  88%|████████▊ | 177/200 [08:23<01:33,  4.07s/it]Dataset: data-is-better-together/10k_prompts_ranked:  89%|████████▉ | 178/200 [08:25<01:20,  3.65s/it]Dataset: data-is-better-together/10k_prompts_ranked:  90%|████████▉ | 179/200 [08:30<01:25,  4.07s/it]Dataset: data-is-better-together/10k_prompts_ranked:  90%|█████████ | 180/200 [08:32<01:04,  3.21s/it]Dataset: data-is-better-together/10k_prompts_ranked:  90%|█████████ | 181/200 [08:32<00:47,  2.52s/it]Dataset: data-is-better-together/10k_prompts_ranked:  91%|█████████ | 182/200 [08:34<00:40,  2.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  92%|█████████▏| 183/200 [08:35<00:32,  1.90s/it]Dataset: data-is-better-together/10k_prompts_ranked:  92%|█████████▏| 184/200 [08:37<00:29,  1.82s/it]Dataset: data-is-better-together/10k_prompts_ranked:  92%|█████████▎| 185/200 [08:39<00:31,  2.07s/it]Dataset: data-is-better-together/10k_prompts_ranked:  93%|█████████▎| 186/200 [08:45<00:45,  3.22s/it]Dataset: data-is-better-together/10k_prompts_ranked:  94%|█████████▎| 187/200 [08:49<00:41,  3.20s/it]Dataset: data-is-better-together/10k_prompts_ranked:  94%|█████████▍| 188/200 [08:49<00:29,  2.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  94%|█████████▍| 189/200 [08:51<00:24,  2.23s/it]Dataset: data-is-better-together/10k_prompts_ranked:  95%|█████████▌| 190/200 [08:54<00:24,  2.41s/it]Dataset: data-is-better-together/10k_prompts_ranked:  96%|█████████▌| 191/200 [08:56<00:22,  2.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  96%|█████████▌| 192/200 [08:57<00:15,  1.94s/it]Dataset: data-is-better-together/10k_prompts_ranked:  96%|█████████▋| 193/200 [08:58<00:12,  1.76s/it]Dataset: data-is-better-together/10k_prompts_ranked:  97%|█████████▋| 194/200 [09:04<00:18,  3.01s/it]Dataset: data-is-better-together/10k_prompts_ranked:  98%|█████████▊| 195/200 [09:09<00:16,  3.36s/it]Dataset: data-is-better-together/10k_prompts_ranked:  98%|█████████▊| 196/200 [09:09<00:09,  2.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  98%|█████████▊| 197/200 [09:12<00:07,  2.55s/it]Dataset: data-is-better-together/10k_prompts_ranked:  99%|█████████▉| 198/200 [09:14<00:04,  2.41s/it]Dataset: data-is-better-together/10k_prompts_ranked: 100%|█████████▉| 199/200 [09:18<00:02,  2.98s/it]Dataset: data-is-better-together/10k_prompts_ranked: 100%|██████████| 200/200 [09:21<00:00,  3.01s/it]Dataset: data-is-better-together/10k_prompts_ranked: 100%|██████████| 200/200 [09:21<00:00,  2.81s/it]
+Average accept_length after 9 steps : 2.444444417953491
+Average accept_length after 171 steps : 1.4795321226119995
+Average accept_length after 256 steps : 1.7890625
+Average accept_length after 114 steps : 2.385964870452881
+Average accept_length after 30 steps : 0.9666666984558105
+Average accept_length after 82 steps : 1.317073106765747
+Average accept_length after 112 steps : 1.8750001192092896
+Average accept_length after 45 steps : 1.533333420753479
+Average accept_length after 256 steps : 1.24609375
+Average accept_length after 5 steps : 1.600000023841858
+Average accept_length after 256 steps : 1.33203125
+Average accept_length after 137 steps : 2.2481751441955566
+Average accept_length after 127 steps : 1.8818897008895874
+Average accept_length after 56 steps : 2.3214287757873535
+Average accept_length after 113 steps : 1.9911503791809082
+Average accept_length after 62 steps : 1.2419354915618896
+Average accept_length after 256 steps : 1.48828125
+Average accept_length after 28 steps : 0.8928571939468384
+Average accept_length after 96 steps : 1.5729167461395264
+Average accept_length after 167 steps : 1.892215609550476
+Average accept_length after 129 steps : 1.2945736646652222
+Average accept_length after 256 steps : 1.2109375
+Average accept_length after 114 steps : 1.6228070259094238
+Average accept_length after 121 steps : 1.2892560958862305
+Average accept_length after 51 steps : 1.3333333730697632
+Average accept_length after 230 steps : 1.317391276359558
+Average accept_length after 161 steps : 1.6273292303085327
+Average accept_length after 128 steps : 1.4921875
+Average accept_length after 107 steps : 1.2336448431015015
+Average accept_length after 172 steps : 1.5697674751281738
+Average accept_length after 235 steps : 1.3106383085250854
+Average accept_length after 188 steps : 1.313829779624939
+Average accept_length after 117 steps : 1.504273533821106
+Average accept_length after 221 steps : 1.22171950340271
+Average accept_length after 52 steps : 1.461538553237915
+Average accept_length after 39 steps : 1.9743590354919434
+Average accept_length after 71 steps : 2.197183132171631
+Average accept_length after 47 steps : 0.8723403811454773
+Average accept_length after 71 steps : 1.0
+Average accept_length after 117 steps : 1.6410257816314697
+Average accept_length after 256 steps : 1.7421875
+Average accept_length after 139 steps : 2.3237409591674805
+Average accept_length after 37 steps : 0.8108108043670654
+Average accept_length after 70 steps : 1.6285713911056519
+Average accept_length after 124 steps : 2.1048386096954346
+Average accept_length after 117 steps : 1.6153846979141235
+Average accept_length after 26 steps : 1.269230842590332
+Average accept_length after 56 steps : 1.3035714626312256
+Average accept_length after 256 steps : 1.8046875
+Average accept_length after 184 steps : 1.7173913717269897
+Average accept_length after 20 steps : 1.75
+Average accept_length after 116 steps : 1.7586207389831543
+Average accept_length after 91 steps : 1.6153846979141235
+Average accept_length after 185 steps : 1.7729730606079102
+Average accept_length after 135 steps : 1.5555555820465088
+🔄 Completions saved to /home/ubuntu/sd/HandEval/outputs/medusaT0.0_medusa-vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_completions.jsonl
+
+✅  Results saved to /home/ubuntu/sd/HandEval/outputs/medusaT0.0_medusa-vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_metrics.json
+{
+  "num_samples": 200,
+  "total_time_sec": 561.7249217033386,
+  "avg_time_per_sample_sec": 2.808624608516693,
+  "samples_file": "outputs/medusaT0.0_medusa-vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_completions.jsonl"
+}

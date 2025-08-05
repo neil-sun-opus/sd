@@ -1,0 +1,6 @@
+{
+  "num_samples": 200,
+  "total_time_sec": 610.2100532054901,
+  "avg_time_per_sample_sec": 3.0510502660274508,
+  "samples_file": "outputs/medusaT0.7_medusa-vicuna-13b-v1.3/data-is-better-together/10k_prompts_ranked_completions.jsonl"
+}
