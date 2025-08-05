@@ -1,0 +1,9 @@
+usage: test_p2.py [-h] [--model MODEL] [--dataset_name DATASET_NAME]
+                  [--dataset_split DATASET_SPLIT]
+                  [--sample_limit SAMPLE_LIMIT] [--n_samples N_SAMPLES]
+                  [--batch_size BATCH_SIZE] [--output_dir OUTPUT_DIR]
+                  [--save_gens] [--model_ckpt MODEL_CKPT] [--use_template]
+                  [--template_model_id TEMPLATE_MODEL_ID] --ea_ckpt EA_CKPT
+                  [--temperature TEMPERATURE]
+                  [--dtype {float16,bfloat16,float32}]
+test_p2.py: error: unrecognized arguments: --top_p 0.9

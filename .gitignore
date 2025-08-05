@@ -1,0 +1,14 @@
+
+# 忽略模型 checkpoint
+*.ckpt
+*.pth
+*.h5
+*.arrow
+*.bin
+
+model_ckpt/
+checkpoints/
+mmlu_all/auxiliary_train/*.arrow
+# 忽略数据集、缓存
+data/
+cache/

@@ -1,0 +1,27 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+Loading EAGLE model from ../model_ckpt/EAGLE3-Vicuna1.3-13B with dtype float16
+Base model: ../model_ckpt/vicuna-13b-v1.3
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.53s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.53s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.28s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]
+/home/ubuntu/sd/EAGLE/eagle/model/ea_model.py:123: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ea_layer_state_dict = torch.load(load_model_path,
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message
+/home/ubuntu/sd/EAGLE/eagle/model/cnets1.py:510: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  weights = torch.load(local_emb_path)
+Traceback (most recent call last):
+  File "/home/ubuntu/sd/HandEval/test_p2.py", line 164, in <module>
+    main(args)
+  File "/home/ubuntu/sd/HandEval/test_p2.py", line 137, in main
+    model = ModelClass(args.model_ckpt, **vars(args))
+  File "/home/ubuntu/sd/HandEval/models/eagle_wrapper.py", line 44, in __init__
+    self.model = EaModel.from_pretrained(
+  File "/home/ubuntu/sd/EAGLE/eagle/model/ea_model.py", line 131, in from_pretrained
+    model = cls(
+  File "/home/ubuntu/sd/EAGLE/eagle/model/ea_model.py", line 75, in __init__
+    load_=self.ea_layer.load_state_dict(ea_layer_state_dict, strict=False)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2584, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for Model:
+	size mismatch for fc.weight: copying a param with shape torch.Size([5120, 15360]) from checkpoint, the shape in current model is torch.Size([5120, 10240]).

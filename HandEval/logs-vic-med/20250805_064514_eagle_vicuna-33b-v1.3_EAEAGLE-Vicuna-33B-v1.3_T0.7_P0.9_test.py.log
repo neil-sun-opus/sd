@@ -1,0 +1,8 @@
+usage: test.py [-h] [--model MODEL] [--task {humaneval,cnndm}]
+               [--sample_limit SAMPLE_LIMIT] [--n_samples N_SAMPLES]
+               [--batch_size BATCH_SIZE] [--output_dir OUTPUT_DIR]
+               [--save_gens] [--model_ckpt MODEL_CKPT] [--use_template]
+               [--template_model_id TEMPLATE_MODEL_ID] --ea_ckpt EA_CKPT
+               [--temperature TEMPERATURE]
+               [--dtype {float16,bfloat16,float32}]
+test.py: error: unrecognized arguments: --top_p 0.9

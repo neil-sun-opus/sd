@@ -1,0 +1,2 @@
+nohup: ignoring input
+>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_204746_vicuna_vicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &

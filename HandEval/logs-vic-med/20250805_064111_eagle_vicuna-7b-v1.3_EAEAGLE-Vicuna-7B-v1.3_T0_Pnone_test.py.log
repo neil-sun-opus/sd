@@ -1,0 +1,21 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+Loading EAGLE model from ../ea_ckpt/EAGLE-Vicuna-7B-v1.3 with dtype float16
+Base model: ../model_ckpt/vicuna-7b-v1.3
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.59s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.02s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.11s/it]
+Traceback (most recent call last):
+  File "/home/ubuntu/sd/HandEval/test.py", line 226, in <module>
+    main(args)
+  File "/home/ubuntu/sd/HandEval/test.py", line 194, in main
+    model = ModelClass(args.model_ckpt, **vars(args))
+  File "/home/ubuntu/sd/HandEval/models/eagle_wrapper.py", line 41, in __init__
+    self.model = EaModel.from_pretrained(
+  File "/home/ubuntu/sd/EAGLE/eagle/model/ea_model.py", line 117, in from_pretrained
+    configpath = hf_hub_download(ea_model_path, "config.json")
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '../ea_ckpt/EAGLE-Vicuna-7B-v1.3'. Use `repo_type` argument if needed.

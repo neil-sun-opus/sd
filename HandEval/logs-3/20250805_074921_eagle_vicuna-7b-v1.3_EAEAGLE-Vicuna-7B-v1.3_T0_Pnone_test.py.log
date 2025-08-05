@@ -1,0 +1,188 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+Loading EAGLE model from ../model_ckpt/EAGLE-Vicuna-7B-v1.3 with dtype float16
+Base model: ../model_ckpt/vicuna-7b-v1.3
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.67s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.15s/it]
+/home/ubuntu/sd/EAGLE/eagle/model/ea_model.py:123: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ea_layer_state_dict = torch.load(load_model_path,
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message
+/home/ubuntu/sd/EAGLE/eagle/model/cnets1.py:510: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  weights = torch.load(local_emb_path)
+HumanEval Tasks:   0%|          | 0/164 [00:00<?, ?it/s]/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+HumanEval Tasks:   1%|          | 1/164 [00:01<02:48,  1.03s/it]HumanEval Tasks:   1%|          | 2/164 [00:01<01:50,  1.47it/s]HumanEval Tasks:   2%|▏         | 3/164 [00:01<01:31,  1.76it/s]HumanEval Tasks:   2%|▏         | 4/164 [00:02<01:20,  1.98it/s]HumanEval Tasks:   3%|▎         | 5/164 [00:03<01:38,  1.61it/s]HumanEval Tasks:   4%|▎         | 6/164 [00:03<01:49,  1.45it/s]HumanEval Tasks:   4%|▍         | 7/164 [00:04<02:00,  1.30it/s]HumanEval Tasks:   5%|▍         | 8/164 [00:05<01:57,  1.33it/s]HumanEval Tasks:   5%|▌         | 9/164 [00:06<01:54,  1.35it/s]HumanEval Tasks:   6%|▌         | 10/164 [00:06<01:44,  1.48it/s]HumanEval Tasks:   7%|▋         | 11/164 [00:08<02:13,  1.14it/s]HumanEval Tasks:   7%|▋         | 12/164 [00:08<02:00,  1.27it/s]HumanEval Tasks:   8%|▊         | 13/164 [00:09<01:47,  1.40it/s]HumanEval Tasks:   9%|▊         | 14/164 [00:09<01:41,  1.48it/s]HumanEval Tasks:   9%|▉         | 15/164 [00:10<01:27,  1.71it/s]HumanEval Tasks:  10%|▉         | 16/164 [00:10<01:11,  2.06it/s]HumanEval Tasks:  10%|█         | 17/164 [00:11<01:16,  1.92it/s]HumanEval Tasks:  11%|█         | 18/164 [00:11<01:13,  2.00it/s]HumanEval Tasks:  12%|█▏        | 19/164 [00:12<01:16,  1.90it/s]HumanEval Tasks:  12%|█▏        | 20/164 [00:12<01:07,  2.15it/s]HumanEval Tasks:  13%|█▎        | 21/164 [00:13<01:21,  1.76it/s]HumanEval Tasks:  13%|█▎        | 22/164 [00:14<01:41,  1.39it/s]HumanEval Tasks:  14%|█▍        | 23/164 [00:14<01:25,  1.65it/s]HumanEval Tasks:  15%|█▍        | 24/164 [00:14<01:05,  2.15it/s]HumanEval Tasks:  15%|█▌        | 25/164 [00:15<01:05,  2.13it/s]HumanEval Tasks:  16%|█▌        | 26/164 [00:15<01:01,  2.24it/s]HumanEval Tasks:  16%|█▋        | 27/164 [00:16<00:58,  2.36it/s]HumanEval Tasks:  17%|█▋        | 28/164 [00:16<00:51,  2.62it/s]HumanEval Tasks:  18%|█▊        | 29/164 [00:16<00:42,  3.14it/s]HumanEval Tasks:  18%|█▊        | 30/164 [00:17<00:57,  2.32it/s]HumanEval Tasks:  19%|█▉        | 31/164 [00:17<00:50,  2.62it/s]HumanEval Tasks:  20%|█▉        | 32/164 [00:18<01:11,  1.85it/s]HumanEval Tasks:  20%|██        | 33/164 [00:19<01:50,  1.18it/s]HumanEval Tasks:  21%|██        | 34/164 [00:20<01:38,  1.32it/s]HumanEval Tasks:  21%|██▏       | 35/164 [00:20<01:14,  1.72it/s]HumanEval Tasks:  22%|██▏       | 36/164 [00:21<01:14,  1.71it/s]HumanEval Tasks:  23%|██▎       | 37/164 [00:22<01:24,  1.51it/s]HumanEval Tasks:  23%|██▎       | 38/164 [00:22<01:08,  1.85it/s]HumanEval Tasks:  24%|██▍       | 39/164 [00:22<01:09,  1.79it/s]HumanEval Tasks:  24%|██▍       | 40/164 [00:24<01:33,  1.32it/s]HumanEval Tasks:  25%|██▌       | 41/164 [00:24<01:27,  1.41it/s]HumanEval Tasks:  26%|██▌       | 42/164 [00:25<01:31,  1.33it/s]HumanEval Tasks:  26%|██▌       | 43/164 [00:25<01:12,  1.68it/s]HumanEval Tasks:  27%|██▋       | 44/164 [00:26<01:09,  1.72it/s]HumanEval Tasks:  27%|██▋       | 45/164 [00:26<01:02,  1.89it/s]HumanEval Tasks:  28%|██▊       | 46/164 [00:27<00:49,  2.37it/s]HumanEval Tasks:  29%|██▊       | 47/164 [00:27<00:50,  2.30it/s]HumanEval Tasks:  29%|██▉       | 48/164 [00:28<00:56,  2.06it/s]HumanEval Tasks:  30%|██▉       | 49/164 [00:28<00:56,  2.03it/s]HumanEval Tasks:  30%|███       | 50/164 [00:29<01:00,  1.88it/s]HumanEval Tasks:  31%|███       | 51/164 [00:29<00:51,  2.18it/s]HumanEval Tasks:  32%|███▏      | 52/164 [00:29<00:50,  2.21it/s]HumanEval Tasks:  32%|███▏      | 53/164 [00:30<00:46,  2.41it/s]HumanEval Tasks:  33%|███▎      | 54/164 [00:30<00:37,  2.92it/s]HumanEval Tasks:  34%|███▎      | 55/164 [00:30<00:43,  2.50it/s]HumanEval Tasks:  34%|███▍      | 56/164 [00:31<00:38,  2.78it/s]HumanEval Tasks:  35%|███▍      | 57/164 [00:31<00:38,  2.74it/s]HumanEval Tasks:  35%|███▌      | 58/164 [00:32<00:54,  1.93it/s]HumanEval Tasks:  36%|███▌      | 59/164 [00:32<00:46,  2.28it/s]HumanEval Tasks:  37%|███▋      | 60/164 [00:33<00:48,  2.14it/s]HumanEval Tasks:  37%|███▋      | 61/164 [00:33<00:43,  2.37it/s]HumanEval Tasks:  38%|███▊      | 62/164 [00:34<00:42,  2.38it/s]HumanEval Tasks:  38%|███▊      | 63/164 [00:34<00:40,  2.49it/s]HumanEval Tasks:  39%|███▉      | 64/164 [00:34<00:35,  2.80it/s]HumanEval Tasks:  40%|███▉      | 65/164 [00:34<00:35,  2.79it/s]HumanEval Tasks:  40%|████      | 66/164 [00:35<00:31,  3.07it/s]HumanEval Tasks:  41%|████      | 67/164 [00:35<00:31,  3.11it/s]HumanEval Tasks:  41%|████▏     | 68/164 [00:35<00:31,  3.06it/s]HumanEval Tasks:  42%|████▏     | 69/164 [00:36<00:33,  2.84it/s]HumanEval Tasks:  43%|████▎     | 70/164 [00:36<00:39,  2.41it/s]HumanEval Tasks:  43%|████▎     | 71/164 [00:37<00:32,  2.84it/s]HumanEval Tasks:  44%|████▍     | 72/164 [00:37<00:34,  2.68it/s]HumanEval Tasks:  45%|████▍     | 73/164 [00:37<00:33,  2.68it/s]HumanEval Tasks:  45%|████▌     | 74/164 [00:38<00:46,  1.95it/s]HumanEval Tasks:  46%|████▌     | 75/164 [00:38<00:37,  2.39it/s]HumanEval Tasks:  46%|████▋     | 76/164 [00:39<00:38,  2.28it/s]HumanEval Tasks:  47%|████▋     | 77/164 [00:39<00:34,  2.56it/s]HumanEval Tasks:  48%|████▊     | 78/164 [00:40<00:37,  2.27it/s]HumanEval Tasks:  48%|████▊     | 79/164 [00:41<01:02,  1.36it/s]HumanEval Tasks:  49%|████▉     | 80/164 [00:42<00:54,  1.54it/s]HumanEval Tasks:  49%|████▉     | 81/164 [00:43<01:05,  1.26it/s]HumanEval Tasks:  50%|█████     | 82/164 [00:44<01:10,  1.16it/s]HumanEval Tasks:  51%|█████     | 83/164 [00:45<01:13,  1.11it/s]HumanEval Tasks:  51%|█████     | 84/164 [00:45<01:00,  1.32it/s]HumanEval Tasks:  52%|█████▏    | 85/164 [00:46<00:51,  1.54it/s]HumanEval Tasks:  52%|█████▏    | 86/164 [00:46<00:44,  1.77it/s]HumanEval Tasks:  53%|█████▎    | 87/164 [00:47<00:43,  1.76it/s]HumanEval Tasks:  54%|█████▎    | 88/164 [00:47<00:36,  2.06it/s]HumanEval Tasks:  54%|█████▍    | 89/164 [00:47<00:29,  2.56it/s]HumanEval Tasks:  55%|█████▍    | 90/164 [00:47<00:28,  2.61it/s]HumanEval Tasks:  55%|█████▌    | 91/164 [00:48<00:24,  2.98it/s]HumanEval Tasks:  56%|█████▌    | 92/164 [00:48<00:25,  2.83it/s]HumanEval Tasks:  57%|█████▋    | 93/164 [00:48<00:26,  2.68it/s]HumanEval Tasks:  57%|█████▋    | 94/164 [00:49<00:37,  1.86it/s]HumanEval Tasks:  58%|█████▊    | 95/164 [00:50<00:40,  1.70it/s]HumanEval Tasks:  59%|█████▊    | 96/164 [00:50<00:35,  1.92it/s]HumanEval Tasks:  59%|█████▉    | 97/164 [00:51<00:36,  1.82it/s]HumanEval Tasks:  60%|█████▉    | 98/164 [00:51<00:29,  2.22it/s]HumanEval Tasks:  60%|██████    | 99/164 [00:52<00:32,  1.97it/s]HumanEval Tasks:  61%|██████    | 100/164 [00:52<00:28,  2.28it/s]HumanEval Tasks:  62%|██████▏   | 101/164 [00:53<00:27,  2.26it/s]HumanEval Tasks:  62%|██████▏   | 102/164 [00:53<00:21,  2.84it/s]HumanEval Tasks:  63%|██████▎   | 103/164 [00:53<00:18,  3.27it/s]HumanEval Tasks:  63%|██████▎   | 104/164 [00:53<00:23,  2.58it/s]HumanEval Tasks:  64%|██████▍   | 105/164 [00:54<00:22,  2.57it/s]HumanEval Tasks:  65%|██████▍   | 106/164 [00:54<00:19,  2.93it/s]HumanEval Tasks:  65%|██████▌   | 107/164 [00:55<00:21,  2.63it/s]HumanEval Tasks:  66%|██████▌   | 108/164 [00:55<00:22,  2.44it/s]HumanEval Tasks:  66%|██████▋   | 109/164 [00:55<00:20,  2.68it/s]HumanEval Tasks:  67%|██████▋   | 110/164 [00:56<00:20,  2.69it/s]HumanEval Tasks:  68%|██████▊   | 111/164 [00:56<00:21,  2.48it/s]HumanEval Tasks:  68%|██████▊   | 112/164 [00:56<00:19,  2.73it/s]HumanEval Tasks:  69%|██████▉   | 113/164 [00:57<00:21,  2.40it/s]HumanEval Tasks:  70%|██████▉   | 114/164 [00:58<00:24,  2.06it/s]HumanEval Tasks:  70%|███████   | 115/164 [00:58<00:24,  1.97it/s]HumanEval Tasks:  71%|███████   | 116/164 [00:59<00:25,  1.87it/s]HumanEval Tasks:  71%|███████▏  | 117/164 [00:59<00:23,  2.03it/s]HumanEval Tasks:  72%|███████▏  | 118/164 [01:00<00:20,  2.23it/s]HumanEval Tasks:  73%|███████▎  | 119/164 [01:01<00:34,  1.29it/s]HumanEval Tasks:  73%|███████▎  | 120/164 [01:02<00:31,  1.41it/s]HumanEval Tasks:  74%|███████▍  | 121/164 [01:02<00:24,  1.75it/s]HumanEval Tasks:  74%|███████▍  | 122/164 [01:02<00:24,  1.73it/s]HumanEval Tasks:  75%|███████▌  | 123/164 [01:03<00:22,  1.85it/s]HumanEval Tasks:  76%|███████▌  | 124/164 [01:03<00:19,  2.08it/s]HumanEval Tasks:  76%|███████▌  | 125/164 [01:04<00:22,  1.77it/s]HumanEval Tasks:  77%|███████▋  | 126/164 [01:04<00:18,  2.04it/s]HumanEval Tasks:  77%|███████▋  | 127/164 [01:05<00:15,  2.38it/s]HumanEval Tasks:  78%|███████▊  | 128/164 [01:05<00:18,  1.91it/s]HumanEval Tasks:  79%|███████▊  | 129/164 [01:06<00:18,  1.93it/s]HumanEval Tasks:  79%|███████▉  | 130/164 [01:07<00:27,  1.26it/s]HumanEval Tasks:  80%|███████▉  | 131/164 [01:09<00:30,  1.10it/s]HumanEval Tasks:  80%|████████  | 132/164 [01:09<00:25,  1.25it/s]HumanEval Tasks:  81%|████████  | 133/164 [01:10<00:25,  1.20it/s]HumanEval Tasks:  82%|████████▏ | 134/164 [01:10<00:19,  1.56it/s]HumanEval Tasks:  82%|████████▏ | 135/164 [01:10<00:15,  1.82it/s]HumanEval Tasks:  83%|████████▎ | 136/164 [01:11<00:15,  1.86it/s]HumanEval Tasks:  84%|████████▎ | 137/164 [01:11<00:13,  2.06it/s]HumanEval Tasks:  84%|████████▍ | 138/164 [01:13<00:19,  1.35it/s]HumanEval Tasks:  85%|████████▍ | 139/164 [01:13<00:16,  1.55it/s]HumanEval Tasks:  85%|████████▌ | 140/164 [01:13<00:13,  1.81it/s]HumanEval Tasks:  86%|████████▌ | 141/164 [01:14<00:10,  2.20it/s]HumanEval Tasks:  87%|████████▋ | 142/164 [01:14<00:12,  1.81it/s]HumanEval Tasks:  87%|████████▋ | 143/164 [01:15<00:11,  1.82it/s]HumanEval Tasks:  88%|████████▊ | 144/164 [01:16<00:12,  1.56it/s]HumanEval Tasks:  88%|████████▊ | 145/164 [01:16<00:11,  1.66it/s]HumanEval Tasks:  89%|████████▉ | 146/164 [01:17<00:09,  1.87it/s]HumanEval Tasks:  90%|████████▉ | 147/164 [01:17<00:08,  1.89it/s]HumanEval Tasks:  90%|█████████ | 148/164 [01:18<00:09,  1.72it/s]HumanEval Tasks:  91%|█████████ | 149/164 [01:19<00:10,  1.38it/s]HumanEval Tasks:  91%|█████████▏| 150/164 [01:19<00:08,  1.60it/s]HumanEval Tasks:  92%|█████████▏| 151/164 [01:20<00:07,  1.63it/s]HumanEval Tasks:  93%|█████████▎| 152/164 [01:20<00:06,  1.91it/s]HumanEval Tasks:  93%|█████████▎| 153/164 [01:21<00:05,  1.96it/s]HumanEval Tasks:  94%|█████████▍| 154/164 [01:21<00:04,  2.10it/s]HumanEval Tasks:  95%|█████████▍| 155/164 [01:22<00:04,  1.83it/s]HumanEval Tasks:  95%|█████████▌| 156/164 [01:22<00:03,  2.06it/s]HumanEval Tasks:  96%|█████████▌| 157/164 [01:23<00:04,  1.49it/s]HumanEval Tasks:  96%|█████████▋| 158/164 [01:24<00:03,  1.81it/s]HumanEval Tasks:  97%|█████████▋| 159/164 [01:24<00:02,  1.85it/s]HumanEval Tasks:  98%|█████████▊| 160/164 [01:25<00:02,  1.98it/s]HumanEval Tasks:  98%|█████████▊| 161/164 [01:26<00:02,  1.35it/s]HumanEval Tasks:  99%|█████████▉| 162/164 [01:26<00:01,  1.40it/s]HumanEval Tasks:  99%|█████████▉| 163/164 [01:27<00:00,  1.64it/s]HumanEval Tasks: 100%|██████████| 164/164 [01:27<00:00,  1.88it/s]HumanEval Tasks: 100%|██████████| 164/164 [01:27<00:00,  1.87it/s]
+Average accept_length over 16 steps: 2.9375
+Average accept_length over 14 steps: 2.2143
+Average accept_length over 14 steps: 2.5000
+Average accept_length over 13 steps: 3.9231
+Average accept_length over 28 steps: 4.6071
+Average accept_length over 28 steps: 5.0357
+Average accept_length over 32 steps: 3.4062
+Average accept_length over 24 steps: 5.0417
+Average accept_length over 24 steps: 3.5833
+Average accept_length over 18 steps: 3.7778
+Average accept_length over 46 steps: 3.9348
+Average accept_length over 20 steps: 4.6000
+Average accept_length over 18 steps: 2.5556
+Average accept_length over 20 steps: 4.1000
+Average accept_length over 12 steps: 3.8333
+Average accept_length over 8 steps: 3.5000
+Average accept_length over 20 steps: 3.8000
+Average accept_length over 15 steps: 6.0667
+Average accept_length over 20 steps: 3.1500
+Average accept_length over 10 steps: 3.1000
+Average accept_length over 27 steps: 3.5926
+Average accept_length over 37 steps: 4.1081
+Average accept_length over 11 steps: 3.5455
+Average accept_length over 4 steps: 5.0000
+Average accept_length over 16 steps: 3.6250
+Average accept_length over 13 steps: 4.0769
+Average accept_length over 12 steps: 3.1667
+Average accept_length over 9 steps: 2.4444
+Average accept_length over 5 steps: 4.6000
+Average accept_length over 23 steps: 4.3043
+Average accept_length over 8 steps: 3.2500
+Average accept_length over 31 steps: 4.6452
+Average accept_length over 54 steps: 3.8704
+Average accept_length over 18 steps: 3.7778
+Average accept_length over 5 steps: 3.4000
+Average accept_length over 20 steps: 4.1500
+Average accept_length over 29 steps: 3.9655
+Average accept_length over 8 steps: 3.3750
+Average accept_length over 20 steps: 3.3500
+Average accept_length over 42 steps: 5.1429
+Average accept_length over 20 steps: 3.3500
+Average accept_length over 28 steps: 3.8571
+Average accept_length over 7 steps: 3.5714
+Average accept_length over 18 steps: 3.7222
+Average accept_length over 13 steps: 2.0000
+Average accept_length over 5 steps: 4.2000
+Average accept_length over 15 steps: 3.8000
+Average accept_length over 20 steps: 4.0000
+Average accept_length over 17 steps: 5.1176
+Average accept_length over 21 steps: 5.2857
+Average accept_length over 9 steps: 4.7778
+Average accept_length over 14 steps: 2.5000
+Average accept_length over 10 steps: 2.6000
+Average accept_length over 5 steps: 3.6000
+Average accept_length over 17 steps: 1.8235
+Average accept_length over 8 steps: 4.6250
+Average accept_length over 12 steps: 3.5000
+Average accept_length over 30 steps: 3.6667
+Average accept_length over 8 steps: 3.3750
+Average accept_length over 18 steps: 2.8889
+Average accept_length over 10 steps: 3.5000
+Average accept_length over 14 steps: 3.1429
+Average accept_length over 12 steps: 2.0000
+Average accept_length over 8 steps: 6.6250
+Average accept_length over 12 steps: 3.8333
+Average accept_length over 8 steps: 2.6250
+Average accept_length over 10 steps: 3.5000
+Average accept_length over 11 steps: 2.7273
+Average accept_length over 13 steps: 2.9231
+Average accept_length over 19 steps: 3.3684
+Average accept_length over 6 steps: 3.3333
+Average accept_length over 14 steps: 3.6429
+Average accept_length over 12 steps: 5.2500
+Average accept_length over 29 steps: 3.2759
+Average accept_length over 6 steps: 6.5000
+Average accept_length over 16 steps: 3.1875
+Average accept_length over 9 steps: 4.6667
+Average accept_length over 19 steps: 4.0000
+Average accept_length over 49 steps: 4.2857
+Average accept_length over 15 steps: 3.2667
+Average accept_length over 39 steps: 4.1538
+Average accept_length over 35 steps: 4.4571
+Average accept_length over 35 steps: 4.4000
+Average accept_length over 14 steps: 3.7143
+Average accept_length over 13 steps: 2.5385
+Average accept_length over 12 steps: 3.5000
+Average accept_length over 19 steps: 3.0000
+Average accept_length over 9 steps: 3.6667
+Average accept_length over 5 steps: 3.8000
+Average accept_length over 12 steps: 2.3333
+Average accept_length over 7 steps: 3.7143
+Average accept_length over 13 steps: 3.3077
+Average accept_length over 14 steps: 2.8571
+Average accept_length over 32 steps: 2.8750
+Average accept_length over 24 steps: 3.4167
+Average accept_length over 12 steps: 3.9167
+Average accept_length over 21 steps: 3.8095
+Average accept_length over 7 steps: 2.8571
+Average accept_length over 22 steps: 2.5455
+Average accept_length over 9 steps: 3.7778
+Average accept_length over 15 steps: 4.4000
+Average accept_length over 4 steps: 5.2500
+Average accept_length over 6 steps: 4.3333
+Average accept_length over 19 steps: 2.6316
+Average accept_length over 13 steps: 3.2308
+Average accept_length over 7 steps: 3.2857
+Average accept_length over 16 steps: 3.5000
+Average accept_length over 16 steps: 4.4375
+Average accept_length over 9 steps: 4.3333
+Average accept_length over 12 steps: 4.4167
+Average accept_length over 16 steps: 4.0000
+Average accept_length over 9 steps: 5.3333
+Average accept_length over 18 steps: 2.7778
+Average accept_length over 22 steps: 3.2273
+Average accept_length over 19 steps: 2.2105
+Average accept_length over 20 steps: 3.3500
+Average accept_length over 13 steps: 2.3846
+Average accept_length over 11 steps: 5.0000
+Average accept_length over 53 steps: 3.8302
+Average accept_length over 18 steps: 3.6667
+Average accept_length over 8 steps: 2.7500
+Average accept_length over 20 steps: 2.1500
+Average accept_length over 15 steps: 3.5333
+Average accept_length over 11 steps: 4.9091
+Average accept_length over 26 steps: 3.4615
+Average accept_length over 10 steps: 3.3000
+Average accept_length over 8 steps: 2.8750
+Average accept_length over 26 steps: 4.8462
+Average accept_length over 17 steps: 2.0588
+Average accept_length over 50 steps: 3.8200
+Average accept_length over 41 steps: 3.2683
+Average accept_length over 18 steps: 2.8889
+Average accept_length over 31 steps: 2.9355
+Average accept_length over 6 steps: 3.5000
+Average accept_length over 11 steps: 3.0000
+Average accept_length over 17 steps: 3.1176
+Average accept_length over 12 steps: 3.9167
+Average accept_length over 46 steps: 4.3043
+Average accept_length over 14 steps: 4.5000
+Average accept_length over 11 steps: 2.9091
+Average accept_length over 7 steps: 4.5714
+Average accept_length over 27 steps: 3.8148
+Average accept_length over 18 steps: 3.3889
+Average accept_length over 29 steps: 3.4483
+Average accept_length over 17 steps: 3.0588
+Average accept_length over 12 steps: 2.5000
+Average accept_length over 17 steps: 4.1176
+Average accept_length over 24 steps: 4.0417
+Average accept_length over 37 steps: 2.8649
+Average accept_length over 13 steps: 3.3077
+Average accept_length over 20 steps: 3.4500
+Average accept_length over 10 steps: 3.2000
+Average accept_length over 16 steps: 4.0625
+Average accept_length over 13 steps: 3.1538
+Average accept_length over 24 steps: 3.0417
+Average accept_length over 11 steps: 2.8182
+Average accept_length over 38 steps: 3.9737
+Average accept_length over 9 steps: 2.6667
+Average accept_length over 17 steps: 2.2941
+Average accept_length over 14 steps: 4.0000
+Average accept_length over 45 steps: 4.8000
+Average accept_length over 22 steps: 3.5455
+Average accept_length over 12 steps: 2.9167
+Average accept_length over 11 steps: 2.6364
+🔄 Completions saved to /home/ubuntu/sd/HandEval/outputs/eagleT0.0_vicuna-7b-v1.3/humaneval_samples.jsonl
+
+✅  Results saved to /home/ubuntu/sd/HandEval/outputs/eagleT0.0_vicuna-7b-v1.3/humaneval_metrics.json
+{
+  "num_samples": 164,
+  "samples_file": "outputs/eagleT0.0_vicuna-7b-v1.3/humaneval_samples.jsonl"
+}

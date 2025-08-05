@@ -1,0 +1,1174 @@
++ set -e
++ DRY_RUN=true
++ BASE1='python test.py'
++ BASE2='python test_p2.py'
++ TEMPS=(0 0.7)
++ TOPPS=("" 0.9)
++ MAX_JOBS=2
++ declare -A CKPT_TABLE
++ CKPT_TABLE[vicuna]='vicuna-7b-v1.3 vicuna-13b-v1.5 vicuna-33b-v1.3'
++ CKPT_TABLE[medusa]='medusa-vicuna-7b-v1.3 medusa-vicuna-13b-v1.3 medusa-vicuna-33b-v1.3'
++ CKPT_TABLE[eagle]='EAGLE-Vicuna-7B-v1.3 EAGLE-Vicuna-13B-v1.3 EAGLE-Vicuna-33B-v1.3 EAGLE3-Vicuna1.3-13B'
++ EA_CKPTS='vicuna-7b-v1.3 vicuna-13b-v1.3 vicuna-33b-v1.3 vicuna-13b-v1.3'
++ mkdir -p logs
++ job_cnt=0
++ for MODEL in vicuna medusa eagle
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ vicuna != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192433_vicuna_vicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192433_vicuna_vicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192434_vicuna_vicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192434_vicuna_vicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192435_vicuna_vicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192435_vicuna_vicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192436_vicuna_vicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192436_vicuna_vicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ vicuna != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-13b-v1.5
+++ basename python test.py
++ LOG=logs/20250804_192437_vicuna_vicuna-13b-v1.5_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0  > logs/20250804_192437_vicuna_vicuna-13b-v1.5_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-13b-v1.5
+++ basename python test_p2.py
++ LOG=logs/20250804_192438_vicuna_vicuna-13b-v1.5_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0  > logs/20250804_192438_vicuna_vicuna-13b-v1.5_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-13b-v1.5
+++ basename python test.py
++ LOG=logs/20250804_192439_vicuna_vicuna-13b-v1.5_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0.7 --top_p 0.9  > logs/20250804_192439_vicuna_vicuna-13b-v1.5_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-13b-v1.5
+++ basename python test_p2.py
++ LOG=logs/20250804_192440_vicuna_vicuna-13b-v1.5_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-13b-v1.5 --temperature 0.7 --top_p 0.9  > logs/20250804_192440_vicuna_vicuna-13b-v1.5_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ vicuna != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192441_vicuna_vicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192441_vicuna_vicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192442_vicuna_vicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192442_vicuna_vicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192443_vicuna_vicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192443_vicuna_vicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192444_vicuna_vicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model vicuna --model_ckpt ../model_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192444_vicuna_vicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for MODEL in vicuna medusa eagle
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ medusa != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192445_medusa_medusa-vicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0  > logs/20250804_192445_medusa_medusa-vicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192446_medusa_medusa-vicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0  > logs/20250804_192446_medusa_medusa-vicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192447_medusa_medusa-vicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192447_medusa_medusa-vicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192448_medusa_medusa-vicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192448_medusa_medusa-vicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ medusa != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192449_medusa_medusa-vicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0  > logs/20250804_192449_medusa_medusa-vicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192450_medusa_medusa-vicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0  > logs/20250804_192450_medusa_medusa-vicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192451_medusa_medusa-vicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192451_medusa_medusa-vicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192452_medusa_medusa-vicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192452_medusa_medusa-vicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ medusa != \e\a\g\l\e ]]
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192453_medusa_medusa-vicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0  > logs/20250804_192453_medusa_medusa-vicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192454_medusa_medusa-vicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0  > logs/20250804_192454_medusa_medusa-vicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192455_medusa_medusa-vicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192455_medusa_medusa-vicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename medusa-vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192456_medusa_medusa-vicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --use_template --model medusa --model_ckpt ../model_ckpt/medusa-vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192456_medusa_medusa-vicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for MODEL in vicuna medusa eagle
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ eagle != \e\a\g\l\e ]]
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192457_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192457_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192458_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192458_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192459_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192459_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192500_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192500_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192501_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192501_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192502_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192502_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192503_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192503_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192504_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192504_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192505_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192505_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192506_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192506_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192507_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192507_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192508_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192508_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192509_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192509_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192510_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192510_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192511_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192511_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-7B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192512_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-7B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192512_eagle_EAGLE-Vicuna-7B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ eagle != \e\a\g\l\e ]]
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192513_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192513_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192514_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192514_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192515_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192515_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192517_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192517_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192518_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192518_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192519_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192519_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192520_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192520_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192521_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192521_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192522_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192522_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192523_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192523_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192524_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192524_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192525_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192525_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192526_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192526_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192527_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192527_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192528_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192528_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-13B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192529_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-13B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192529_eagle_EAGLE-Vicuna-13B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ eagle != \e\a\g\l\e ]]
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192530_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192530_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192531_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192531_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192532_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192532_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192533_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192533_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192534_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192534_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192535_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192535_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192536_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192536_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192537_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192537_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192538_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192538_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192539_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192539_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192540_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192540_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192541_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192541_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192542_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192542_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192543_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192543_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192544_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192544_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE-Vicuna-33B-v1.3
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192545_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE-Vicuna-33B-v1.3 --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192545_eagle_EAGLE-Vicuna-33B-v1.3_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for CKPT in ${CKPT_TABLE[$MODEL]}
++ [[ eagle != \e\a\g\l\e ]]
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192546_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192546_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192547_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0  > logs/20250804_192547_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-7b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192548_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192548_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-7b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192549_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-7b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192549_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-7b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192550_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192550_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192551_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192551_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192552_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192552_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192553_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192553_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192554_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192554_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192555_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0  > logs/20250804_192555_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-33b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192556_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192556_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-33b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192557_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-33b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192557_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-33b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for EA in $EA_CKPTS
++ for idx in "${!TEMPS[@]}"
++ T=0
++ P=
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192558_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192558_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0'
++ [[ -n '' ]]
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192559_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0  > logs/20250804_192559_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0_Pnone_python.log 2>&1 &'
++ true
++ sleep 1
++ for idx in "${!TEMPS[@]}"
++ T=0.7
++ P=0.9
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test.py
++ LOG=logs/20250804_192600_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192600_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ for BASE in "$BASE1" "$BASE2"
++ CMD='python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7'
++ [[ -n 0.9 ]]
++ CMD+=' --top_p 0.9'
+++ date +%Y%m%d_%H%M%S
+++ basename EAGLE3-Vicuna1.3-13B
+++ basename vicuna-13b-v1.3
+++ basename python test_p2.py
++ LOG=logs/20250804_192601_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log
++ echo '>> python test_p2.py --model eagle --model_ckpt ../model_ckpt/EAGLE3-Vicuna1.3-13B --ea_ckpt ../ea_ckpt/vicuna-13b-v1.3 --temperature 0.7 --top_p 0.9  > logs/20250804_192601_eagle_EAGLE3-Vicuna1.3-13B_EAvicuna-13b-v1.3_T0.7_P0.9_python.log 2>&1 &'
++ true
++ sleep 1
++ echo 全部任务提交完毕。DRY_RUN=true

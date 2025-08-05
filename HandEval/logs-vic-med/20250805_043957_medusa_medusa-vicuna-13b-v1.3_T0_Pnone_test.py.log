@@ -1,0 +1,183 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.54s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.54s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.29s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.35s/it]
+Some weights of MedusaModelLlama were not initialized from the model checkpoint at /home/ubuntu/sd/model_ckpt/vicuna-13b-v1.3 and are newly initialized: ['medusa_head.0.0.linear.bias', 'medusa_head.0.0.linear.weight', 'medusa_head.0.1.weight', 'medusa_head.1.0.linear.bias', 'medusa_head.1.0.linear.weight', 'medusa_head.1.1.weight', 'medusa_head.2.0.linear.bias', 'medusa_head.2.0.linear.weight', 'medusa_head.2.1.weight', 'medusa_head.3.0.linear.bias', 'medusa_head.3.0.linear.weight', 'medusa_head.3.1.weight', 'medusa_head.4.0.linear.bias', 'medusa_head.4.0.linear.weight', 'medusa_head.4.1.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/ubuntu/sd/Medusa/medusa/model/medusa_model.py:156: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  medusa_head_state_dict = torch.load(filename, map_location=model.device)
+HumanEval Tasks:   0%|          | 0/164 [00:00<?, ?it/s]HumanEval Tasks:   1%|          | 1/164 [00:02<05:55,  2.18s/it]HumanEval Tasks:   1%|          | 2/164 [00:03<04:08,  1.54s/it]HumanEval Tasks:   2%|▏         | 3/164 [00:03<02:43,  1.02s/it]HumanEval Tasks:   2%|▏         | 4/164 [00:04<02:08,  1.25it/s]HumanEval Tasks:   3%|▎         | 5/164 [00:05<02:50,  1.07s/it]HumanEval Tasks:   4%|▎         | 6/164 [00:06<02:39,  1.01s/it]HumanEval Tasks:   4%|▍         | 7/164 [00:07<02:51,  1.09s/it]HumanEval Tasks:   5%|▍         | 8/164 [00:08<02:45,  1.06s/it]HumanEval Tasks:   5%|▌         | 9/164 [00:09<02:36,  1.01s/it]HumanEval Tasks:   6%|▌         | 10/164 [00:10<02:22,  1.08it/s]HumanEval Tasks:   7%|▋         | 11/164 [00:13<03:56,  1.55s/it]HumanEval Tasks:   7%|▋         | 12/164 [00:14<03:38,  1.44s/it]HumanEval Tasks:   8%|▊         | 13/164 [00:15<02:57,  1.17s/it]HumanEval Tasks:   9%|▊         | 14/164 [00:16<02:53,  1.15s/it]HumanEval Tasks:   9%|▉         | 15/164 [00:16<02:27,  1.01it/s]HumanEval Tasks:  10%|▉         | 16/164 [00:17<01:58,  1.25it/s]HumanEval Tasks:  10%|█         | 17/164 [00:17<01:44,  1.40it/s]HumanEval Tasks:  11%|█         | 18/164 [00:18<02:02,  1.19it/s]HumanEval Tasks:  12%|█▏        | 19/164 [00:19<01:54,  1.26it/s]HumanEval Tasks:  12%|█▏        | 20/164 [00:20<01:44,  1.37it/s]HumanEval Tasks:  13%|█▎        | 21/164 [00:21<01:54,  1.24it/s]HumanEval Tasks:  13%|█▎        | 22/164 [00:22<02:28,  1.05s/it]HumanEval Tasks:  14%|█▍        | 23/164 [00:23<02:19,  1.01it/s]HumanEval Tasks:  15%|█▍        | 24/164 [00:24<01:58,  1.18it/s]HumanEval Tasks:  15%|█▌        | 25/164 [00:24<01:57,  1.18it/s]HumanEval Tasks:  16%|█▌        | 26/164 [00:26<02:24,  1.05s/it]HumanEval Tasks:  16%|█▋        | 27/164 [00:27<02:03,  1.11it/s]HumanEval Tasks:  17%|█▋        | 28/164 [00:28<02:13,  1.02it/s]HumanEval Tasks:  18%|█▊        | 29/164 [00:28<01:56,  1.16it/s]HumanEval Tasks:  18%|█▊        | 30/164 [00:29<02:01,  1.10it/s]HumanEval Tasks:  19%|█▉        | 31/164 [00:30<01:35,  1.39it/s]HumanEval Tasks:  20%|█▉        | 32/164 [00:31<02:01,  1.09it/s]HumanEval Tasks:  20%|██        | 33/164 [00:34<03:17,  1.50s/it]HumanEval Tasks:  21%|██        | 34/164 [00:34<02:42,  1.25s/it]HumanEval Tasks:  21%|██▏       | 35/164 [00:35<02:09,  1.01s/it]HumanEval Tasks:  22%|██▏       | 36/164 [00:35<01:38,  1.30it/s]HumanEval Tasks:  23%|██▎       | 37/164 [00:36<01:33,  1.36it/s]HumanEval Tasks:  23%|██▎       | 38/164 [00:36<01:27,  1.45it/s]HumanEval Tasks:  24%|██▍       | 39/164 [00:38<01:44,  1.20it/s]HumanEval Tasks:  24%|██▍       | 40/164 [00:39<02:16,  1.10s/it]HumanEval Tasks:  25%|██▌       | 41/164 [00:42<03:01,  1.48s/it]HumanEval Tasks:  26%|██▌       | 42/164 [00:42<02:33,  1.25s/it]HumanEval Tasks:  26%|██▌       | 43/164 [00:43<01:58,  1.02it/s]HumanEval Tasks:  27%|██▋       | 44/164 [00:43<01:40,  1.19it/s]HumanEval Tasks:  27%|██▋       | 45/164 [00:43<01:19,  1.51it/s]HumanEval Tasks:  28%|██▊       | 46/164 [00:44<01:06,  1.79it/s]HumanEval Tasks:  29%|██▊       | 47/164 [00:44<01:05,  1.78it/s]HumanEval Tasks:  29%|██▉       | 48/164 [00:45<01:05,  1.77it/s]HumanEval Tasks:  30%|██▉       | 49/164 [00:46<01:18,  1.46it/s]HumanEval Tasks:  30%|███       | 50/164 [00:48<01:54,  1.01s/it]HumanEval Tasks:  31%|███       | 51/164 [00:48<01:45,  1.07it/s]HumanEval Tasks:  32%|███▏      | 52/164 [00:49<01:29,  1.24it/s]HumanEval Tasks:  32%|███▏      | 53/164 [00:49<01:13,  1.50it/s]HumanEval Tasks:  33%|███▎      | 54/164 [00:49<00:57,  1.92it/s]HumanEval Tasks:  34%|███▎      | 55/164 [00:50<01:03,  1.73it/s]HumanEval Tasks:  34%|███▍      | 56/164 [00:51<00:55,  1.94it/s]HumanEval Tasks:  35%|███▍      | 57/164 [00:51<00:59,  1.80it/s]HumanEval Tasks:  35%|███▌      | 58/164 [00:52<01:11,  1.49it/s]HumanEval Tasks:  36%|███▌      | 59/164 [00:53<01:26,  1.21it/s]HumanEval Tasks:  37%|███▋      | 60/164 [00:54<01:23,  1.25it/s]HumanEval Tasks:  37%|███▋      | 61/164 [00:54<01:06,  1.56it/s]HumanEval Tasks:  38%|███▊      | 62/164 [00:55<01:21,  1.25it/s]HumanEval Tasks:  38%|███▊      | 63/164 [00:56<01:20,  1.26it/s]HumanEval Tasks:  39%|███▉      | 64/164 [00:57<01:13,  1.36it/s]HumanEval Tasks:  40%|███▉      | 65/164 [00:58<01:15,  1.31it/s]HumanEval Tasks:  40%|████      | 66/164 [00:59<01:33,  1.05it/s]HumanEval Tasks:  41%|████      | 67/164 [00:59<01:15,  1.28it/s]HumanEval Tasks:  41%|████▏     | 68/164 [01:01<01:33,  1.02it/s]HumanEval Tasks:  42%|████▏     | 69/164 [01:02<01:25,  1.11it/s]HumanEval Tasks:  43%|████▎     | 70/164 [01:03<01:25,  1.09it/s]HumanEval Tasks:  43%|████▎     | 71/164 [01:03<01:20,  1.16it/s]HumanEval Tasks:  44%|████▍     | 72/164 [01:04<01:15,  1.22it/s]HumanEval Tasks:  45%|████▍     | 73/164 [01:05<01:16,  1.19it/s]HumanEval Tasks:  45%|████▌     | 74/164 [01:06<01:18,  1.14it/s]HumanEval Tasks:  46%|████▌     | 75/164 [01:07<01:18,  1.14it/s]HumanEval Tasks:  46%|████▋     | 76/164 [01:08<01:14,  1.19it/s]HumanEval Tasks:  47%|████▋     | 77/164 [01:08<00:57,  1.51it/s]HumanEval Tasks:  48%|████▊     | 78/164 [01:08<00:51,  1.68it/s]HumanEval Tasks:  48%|████▊     | 79/164 [01:09<00:50,  1.70it/s]HumanEval Tasks:  49%|████▉     | 80/164 [01:09<00:48,  1.74it/s]HumanEval Tasks:  49%|████▉     | 81/164 [01:10<00:47,  1.76it/s]HumanEval Tasks:  50%|█████     | 82/164 [01:11<00:58,  1.39it/s]HumanEval Tasks:  51%|█████     | 83/164 [01:12<01:12,  1.11it/s]HumanEval Tasks:  51%|█████     | 84/164 [01:13<01:02,  1.28it/s]HumanEval Tasks:  52%|█████▏    | 85/164 [01:15<01:26,  1.10s/it]HumanEval Tasks:  52%|█████▏    | 86/164 [01:15<01:16,  1.02it/s]HumanEval Tasks:  53%|█████▎    | 87/164 [01:16<00:58,  1.31it/s]HumanEval Tasks:  54%|█████▎    | 88/164 [01:16<00:58,  1.29it/s]HumanEval Tasks:  54%|█████▍    | 89/164 [01:19<01:28,  1.18s/it]HumanEval Tasks:  55%|█████▍    | 90/164 [01:19<01:16,  1.03s/it]HumanEval Tasks:  55%|█████▌    | 91/164 [01:19<00:57,  1.26it/s]HumanEval Tasks:  56%|█████▌    | 92/164 [01:21<01:13,  1.02s/it]HumanEval Tasks:  57%|█████▋    | 93/164 [01:21<00:59,  1.20it/s]HumanEval Tasks:  57%|█████▋    | 94/164 [01:23<01:16,  1.09s/it]HumanEval Tasks:  58%|█████▊    | 95/164 [01:27<02:10,  1.89s/it]HumanEval Tasks:  59%|█████▊    | 96/164 [01:30<02:27,  2.17s/it]HumanEval Tasks:  59%|█████▉    | 97/164 [01:31<02:03,  1.84s/it]HumanEval Tasks:  60%|█████▉    | 98/164 [01:31<01:29,  1.35s/it]HumanEval Tasks:  60%|██████    | 99/164 [01:31<01:10,  1.09s/it]HumanEval Tasks:  61%|██████    | 100/164 [01:32<00:55,  1.14it/s]HumanEval Tasks:  62%|██████▏   | 101/164 [01:32<00:49,  1.27it/s]HumanEval Tasks:  62%|██████▏   | 102/164 [01:33<00:37,  1.65it/s]HumanEval Tasks:  63%|██████▎   | 103/164 [01:33<00:34,  1.76it/s]HumanEval Tasks:  63%|██████▎   | 104/164 [01:34<00:38,  1.55it/s]HumanEval Tasks:  64%|██████▍   | 105/164 [01:35<00:51,  1.14it/s]HumanEval Tasks:  65%|██████▍   | 106/164 [01:36<00:51,  1.13it/s]HumanEval Tasks:  65%|██████▌   | 107/164 [01:37<00:43,  1.30it/s]HumanEval Tasks:  66%|██████▌   | 108/164 [01:37<00:40,  1.38it/s]HumanEval Tasks:  66%|██████▋   | 109/164 [01:38<00:35,  1.56it/s]HumanEval Tasks:  67%|██████▋   | 110/164 [01:41<01:20,  1.49s/it]HumanEval Tasks:  68%|██████▊   | 111/164 [01:42<01:11,  1.36s/it]HumanEval Tasks:  68%|██████▊   | 112/164 [01:43<00:58,  1.13s/it]HumanEval Tasks:  69%|██████▉   | 113/164 [01:43<00:48,  1.06it/s]HumanEval Tasks:  70%|██████▉   | 114/164 [01:44<00:46,  1.07it/s]HumanEval Tasks:  70%|███████   | 115/164 [01:45<00:36,  1.34it/s]HumanEval Tasks:  71%|███████   | 116/164 [01:46<00:45,  1.06it/s]HumanEval Tasks:  71%|███████▏  | 117/164 [01:47<00:40,  1.15it/s]HumanEval Tasks:  72%|███████▏  | 118/164 [01:47<00:34,  1.32it/s]HumanEval Tasks:  73%|███████▎  | 119/164 [01:49<00:45,  1.02s/it]HumanEval Tasks:  73%|███████▎  | 120/164 [01:49<00:37,  1.17it/s]HumanEval Tasks:  74%|███████▍  | 121/164 [01:50<00:37,  1.15it/s]HumanEval Tasks:  74%|███████▍  | 122/164 [01:51<00:32,  1.29it/s]HumanEval Tasks:  75%|███████▌  | 123/164 [01:52<00:34,  1.20it/s]HumanEval Tasks:  76%|███████▌  | 124/164 [01:55<01:01,  1.53s/it]HumanEval Tasks:  76%|███████▌  | 125/164 [01:57<01:11,  1.82s/it]HumanEval Tasks:  77%|███████▋  | 126/164 [01:58<00:57,  1.52s/it]HumanEval Tasks:  77%|███████▋  | 127/164 [01:59<00:43,  1.18s/it]HumanEval Tasks:  78%|███████▊  | 128/164 [02:00<00:40,  1.13s/it]HumanEval Tasks:  79%|███████▊  | 129/164 [02:00<00:33,  1.04it/s]HumanEval Tasks:  79%|███████▉  | 130/164 [02:02<00:46,  1.36s/it]HumanEval Tasks:  80%|███████▉  | 131/164 [02:05<01:00,  1.84s/it]HumanEval Tasks:  80%|████████  | 132/164 [02:06<00:49,  1.54s/it]HumanEval Tasks:  81%|████████  | 133/164 [02:07<00:39,  1.26s/it]HumanEval Tasks:  82%|████████▏ | 134/164 [02:07<00:28,  1.04it/s]HumanEval Tasks:  82%|████████▏ | 135/164 [02:08<00:24,  1.17it/s]HumanEval Tasks:  83%|████████▎ | 136/164 [02:08<00:19,  1.41it/s]HumanEval Tasks:  84%|████████▎ | 137/164 [02:09<00:18,  1.45it/s]HumanEval Tasks:  84%|████████▍ | 138/164 [02:10<00:23,  1.12it/s]HumanEval Tasks:  85%|████████▍ | 139/164 [02:12<00:28,  1.12s/it]HumanEval Tasks:  85%|████████▌ | 140/164 [02:13<00:27,  1.16s/it]HumanEval Tasks:  86%|████████▌ | 141/164 [02:13<00:21,  1.07it/s]HumanEval Tasks:  87%|████████▋ | 142/164 [02:14<00:21,  1.03it/s]HumanEval Tasks:  87%|████████▋ | 143/164 [02:15<00:18,  1.12it/s]HumanEval Tasks:  88%|████████▊ | 144/164 [02:16<00:16,  1.25it/s]HumanEval Tasks:  88%|████████▊ | 145/164 [02:17<00:14,  1.28it/s]HumanEval Tasks:  89%|████████▉ | 146/164 [02:17<00:12,  1.48it/s]HumanEval Tasks:  90%|████████▉ | 147/164 [02:17<00:10,  1.56it/s]HumanEval Tasks:  90%|█████████ | 148/164 [02:18<00:11,  1.42it/s]HumanEval Tasks:  91%|█████████ | 149/164 [02:20<00:13,  1.07it/s]HumanEval Tasks:  91%|█████████▏| 150/164 [02:20<00:10,  1.28it/s]HumanEval Tasks:  92%|█████████▏| 151/164 [02:21<00:09,  1.37it/s]HumanEval Tasks:  93%|█████████▎| 152/164 [02:21<00:07,  1.55it/s]HumanEval Tasks:  93%|█████████▎| 153/164 [02:22<00:06,  1.58it/s]HumanEval Tasks:  94%|█████████▍| 154/164 [02:26<00:16,  1.63s/it]HumanEval Tasks:  95%|█████████▍| 155/164 [02:26<00:11,  1.28s/it]HumanEval Tasks:  95%|█████████▌| 156/164 [02:27<00:08,  1.08s/it]HumanEval Tasks:  96%|█████████▌| 157/164 [02:29<00:10,  1.51s/it]HumanEval Tasks:  96%|█████████▋| 158/164 [02:35<00:17,  2.86s/it]HumanEval Tasks:  97%|█████████▋| 159/164 [02:36<00:10,  2.19s/it]HumanEval Tasks:  98%|█████████▊| 160/164 [02:37<00:06,  1.68s/it]HumanEval Tasks:  98%|█████████▊| 161/164 [02:39<00:05,  1.89s/it]HumanEval Tasks:  99%|█████████▉| 162/164 [02:40<00:03,  1.56s/it]HumanEval Tasks:  99%|█████████▉| 163/164 [02:41<00:01,  1.44s/it]HumanEval Tasks: 100%|██████████| 164/164 [02:41<00:00,  1.14s/it]HumanEval Tasks: 100%|██████████| 164/164 [02:41<00:00,  1.01it/s]
+Average accept_length: 2.1351351737976074
+Average accept_length: 1.6739131212234497
+Average accept_length: 1.625
+Average accept_length: 2.21052622795105
+Average accept_length: 1.5303031206130981
+Average accept_length: 1.9736841917037964
+Average accept_length: 1.4444444179534912
+Average accept_length: 1.8809523582458496
+Average accept_length: 2.1052632331848145
+Average accept_length: 2.2580645084381104
+Average accept_length: 1.5793651342391968
+Average accept_length: 1.5
+Average accept_length: 2.08695650100708
+Average accept_length: 1.7021275758743286
+Average accept_length: 1.9199999570846558
+Average accept_length: 1.7142858505249023
+Average accept_length: 2.809523820877075
+Average accept_length: 2.042553186416626
+Average accept_length: 2.0714287757873535
+Average accept_length: 2.0
+Average accept_length: 2.2682926654815674
+Average accept_length: 1.8695652484893799
+Average accept_length: 2.0
+Average accept_length: 1.6666667461395264
+Average accept_length: 2.1111111640930176
+Average accept_length: 1.609375
+Average accept_length: 2.2608695030212402
+Average accept_length: 1.5714285373687744
+Average accept_length: 2.2083334922790527
+Average accept_length: 1.9285714626312256
+Average accept_length: 2.090909242630005
+Average accept_length: 2.0172414779663086
+Average accept_length: 1.42148756980896
+Average accept_length: 2.185185194015503
+Average accept_length: 2.277777910232544
+Average accept_length: 1.75
+Average accept_length: 2.2142858505249023
+Average accept_length: 1.9166667461395264
+Average accept_length: 1.6999999284744263
+Average accept_length: 2.0135135650634766
+Average accept_length: 1.8811880350112915
+Average accept_length: 1.6451612710952759
+Average accept_length: 1.571428656578064
+Average accept_length: 2.190476179122925
+Average accept_length: 1.899999976158142
+Average accept_length: 2.0
+Average accept_length: 2.2173912525177
+Average accept_length: 1.8333333730697632
+Average accept_length: 1.5365853309631348
+Average accept_length: 1.855263113975525
+Average accept_length: 1.25
+Average accept_length: 1.7000000476837158
+Average accept_length: 1.571428656578064
+Average accept_length: 2.2857143878936768
+Average accept_length: 1.7333334684371948
+Average accept_length: 2.0
+Average accept_length: 1.9629629850387573
+Average accept_length: 1.475000023841858
+Average accept_length: 2.0399999618530273
+Average accept_length: 1.8064515590667725
+Average accept_length: 2.0
+Average accept_length: 1.6200000047683716
+Average accept_length: 2.0
+Average accept_length: 1.959999918937683
+Average accept_length: 1.5714285373687744
+Average accept_length: 1.5000001192092896
+Average accept_length: 2.0
+Average accept_length: 1.3934425115585327
+Average accept_length: 1.8333333730697632
+Average accept_length: 1.850000023841858
+Average accept_length: 1.9032257795333862
+Average accept_length: 1.7666667699813843
+Average accept_length: 2.054054021835327
+Average accept_length: 1.926829218864441
+Average accept_length: 1.5945945978164673
+Average accept_length: 2.1875
+Average accept_length: 2.1111111640930176
+Average accept_length: 2.1111111640930176
+Average accept_length: 2.04347825050354
+Average accept_length: 1.3636363744735718
+Average accept_length: 1.91304349899292
+Average accept_length: 1.6222223043441772
+Average accept_length: 1.5438597202301025
+Average accept_length: 2.047619104385376
+Average accept_length: 1.683544397354126
+Average accept_length: 1.7333334684371948
+Average accept_length: 2.0
+Average accept_length: 1.8484848737716675
+Average accept_length: 2.0326087474823
+Average accept_length: 2.0
+Average accept_length: 2.444444417953491
+Average accept_length: 1.2878788709640503
+Average accept_length: 2.1764705181121826
+Average accept_length: 1.3611111640930176
+Average accept_length: 1.8113206624984741
+Average accept_length: 1.2773109674453735
+Average accept_length: 2.3111112117767334
+Average accept_length: 1.375
+Average accept_length: 2.1052632331848145
+Average accept_length: 1.8000000715255737
+Average accept_length: 1.875
+Average accept_length: 2.0
+Average accept_length: 2.473684310913086
+Average accept_length: 1.8235293626785278
+Average accept_length: 2.0
+Average accept_length: 1.5789474248886108
+Average accept_length: 2.299999952316284
+Average accept_length: 2.42307710647583
+Average accept_length: 2.277777910232544
+Average accept_length: 1.5878379344940186
+Average accept_length: 1.8409091234207153
+Average accept_length: 2.0
+Average accept_length: 1.7619048357009888
+Average accept_length: 2.026315689086914
+Average accept_length: 2.25
+Average accept_length: 1.8965517282485962
+Average accept_length: 1.6896551847457886
+Average accept_length: 1.9500000476837158
+Average accept_length: 1.5882352590560913
+Average accept_length: 1.894736886024475
+Average accept_length: 1.4473683834075928
+Average accept_length: 2.0
+Average accept_length: 1.6904761791229248
+Average accept_length: 1.5037037134170532
+Average accept_length: 2.233644723892212
+Average accept_length: 1.2571429014205933
+Average accept_length: 2.200000047683716
+Average accept_length: 1.6904761791229248
+Average accept_length: 2.0416667461395264
+Average accept_length: 1.75
+Average accept_length: 1.6507937908172607
+Average accept_length: 2.194444417953491
+Average accept_length: 1.7599999904632568
+Average accept_length: 1.7000000476837158
+Average accept_length: 1.5999999046325684
+Average accept_length: 2.3333334922790527
+Average accept_length: 1.5555555820465088
+Average accept_length: 1.8275861740112305
+Average accept_length: 1.535211205482483
+Average accept_length: 1.7307692766189575
+Average accept_length: 1.7058823108673096
+Average accept_length: 1.790697693824768
+Average accept_length: 2.2333333492279053
+Average accept_length: 2.1666667461395264
+Average accept_length: 1.6774193048477173
+Average accept_length: 1.9411765336990356
+Average accept_length: 2.17391300201416
+Average accept_length: 2.3428571224212646
+Average accept_length: 1.6065572500228882
+Average accept_length: 2.470588207244873
+Average accept_length: 1.9199999570846558
+Average accept_length: 2.1666667461395264
+Average accept_length: 1.959999918937683
+Average accept_length: 1.375
+Average accept_length: 1.5500000715255737
+Average accept_length: 2.119999885559082
+Average accept_length: 1.7129629850387573
+Average accept_length: 1.47265625
+Average accept_length: 1.959999918937683
+Average accept_length: 1.4500000476837158
+Average accept_length: 1.4901961088180542
+Average accept_length: 1.90625
+Average accept_length: 1.5799999237060547
+Average accept_length: 2.3529412746429443
+🔄 Completions saved to /home/ubuntu/sd/HandEval/outputs/medusa-vicuna-13b-v1.3/humaneval_samples.jsonl
+
+✅  Results saved to /home/ubuntu/sd/HandEval/outputs/medusa-vicuna-13b-v1.3/humaneval_metrics.json
+{
+  "num_samples": 164,
+  "samples_file": "outputs/medusa-vicuna-13b-v1.3/humaneval_samples.jsonl"
+}

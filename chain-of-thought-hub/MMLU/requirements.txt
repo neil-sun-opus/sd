@@ -1,0 +1,7 @@
+transformers
+tqdm
+pandas
+tensor_parallel
+argparse
+einops
+accelerate

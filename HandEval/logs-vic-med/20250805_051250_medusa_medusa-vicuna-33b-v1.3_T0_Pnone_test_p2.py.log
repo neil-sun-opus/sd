@@ -1,0 +1,159 @@
+LlamaForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/7 [00:00<?, ?it/s]Loading checkpoint shards:  14%|█▍        | 1/7 [00:01<00:08,  1.50s/it]Loading checkpoint shards:  29%|██▊       | 2/7 [00:03<00:07,  1.51s/it]Loading checkpoint shards:  43%|████▎     | 3/7 [00:04<00:06,  1.51s/it]Loading checkpoint shards:  57%|█████▋    | 4/7 [00:06<00:04,  1.51s/it]Loading checkpoint shards:  71%|███████▏  | 5/7 [00:07<00:03,  1.51s/it]Loading checkpoint shards:  86%|████████▌ | 6/7 [00:09<00:01,  1.52s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:09<00:00,  1.32s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:09<00:00,  1.43s/it]
+Some weights of MedusaModelLlama were not initialized from the model checkpoint at /home/ubuntu/sd/model_ckpt/vicuna-33b-v1.3 and are newly initialized: ['medusa_head.0.0.linear.bias', 'medusa_head.0.0.linear.weight', 'medusa_head.0.1.weight', 'medusa_head.1.0.linear.bias', 'medusa_head.1.0.linear.weight', 'medusa_head.1.1.weight', 'medusa_head.2.0.linear.bias', 'medusa_head.2.0.linear.weight', 'medusa_head.2.1.weight', 'medusa_head.3.0.linear.bias', 'medusa_head.3.0.linear.weight', 'medusa_head.3.1.weight', 'medusa_head.4.0.linear.bias', 'medusa_head.4.0.linear.weight', 'medusa_head.4.1.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/ubuntu/sd/Medusa/medusa/model/medusa_model.py:156: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  medusa_head_state_dict = torch.load(filename, map_location=model.device)
+Dataset: data-is-better-together/10k_prompts_ranked:   0%|          | 0/200 [00:00<?, ?it/s]Dataset: data-is-better-together/10k_prompts_ranked:   0%|          | 1/200 [00:10<35:58, 10.85s/it]Dataset: data-is-better-together/10k_prompts_ranked:   1%|          | 2/200 [00:21<35:43, 10.82s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▏         | 3/200 [00:32<35:36, 10.85s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▏         | 4/200 [00:37<27:28,  8.41s/it]Dataset: data-is-better-together/10k_prompts_ranked:   2%|▎         | 5/200 [00:41<22:31,  6.93s/it]Dataset: data-is-better-together/10k_prompts_ranked:   3%|▎         | 6/200 [00:52<27:21,  8.46s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▎         | 7/200 [01:02<28:40,  8.92s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▍         | 8/200 [01:04<21:06,  6.60s/it]Dataset: data-is-better-together/10k_prompts_ranked:   4%|▍         | 9/200 [01:15<25:19,  7.95s/it]Dataset: data-is-better-together/10k_prompts_ranked:   5%|▌         | 10/200 [01:22<24:22,  7.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▌         | 11/200 [01:31<25:48,  8.19s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▌         | 12/200 [01:33<19:05,  6.09s/it]Dataset: data-is-better-together/10k_prompts_ranked:   6%|▋         | 13/200 [01:36<16:44,  5.37s/it]Dataset: data-is-better-together/10k_prompts_ranked:   7%|▋         | 14/200 [01:47<21:48,  7.03s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 15/200 [01:56<23:40,  7.68s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 16/200 [02:07<26:29,  8.64s/it]Dataset: data-is-better-together/10k_prompts_ranked:   8%|▊         | 17/200 [02:18<28:19,  9.29s/it]Dataset: data-is-better-together/10k_prompts_ranked:   9%|▉         | 18/200 [02:21<22:06,  7.29s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|▉         | 19/200 [02:30<23:41,  7.86s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|█         | 20/200 [02:32<18:01,  6.01s/it]Dataset: data-is-better-together/10k_prompts_ranked:  10%|█         | 21/200 [02:37<17:51,  5.98s/it]Dataset: data-is-better-together/10k_prompts_ranked:  11%|█         | 22/200 [02:43<17:06,  5.77s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▏        | 23/200 [02:51<19:04,  6.47s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▏        | 24/200 [03:02<22:44,  7.75s/it]Dataset: data-is-better-together/10k_prompts_ranked:  12%|█▎        | 25/200 [03:07<20:57,  7.18s/it]Dataset: data-is-better-together/10k_prompts_ranked:  13%|█▎        | 26/200 [03:18<23:59,  8.27s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▎        | 27/200 [03:22<20:05,  6.97s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▍        | 28/200 [03:33<23:14,  8.11s/it]Dataset: data-is-better-together/10k_prompts_ranked:  14%|█▍        | 29/200 [03:43<24:56,  8.75s/it]Dataset: data-is-better-together/10k_prompts_ranked:  15%|█▌        | 30/200 [03:47<20:33,  7.26s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▌        | 31/200 [03:53<19:11,  6.81s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▌        | 32/200 [04:04<22:28,  8.02s/it]Dataset: data-is-better-together/10k_prompts_ranked:  16%|█▋        | 33/200 [04:14<24:43,  8.88s/it]Dataset: data-is-better-together/10k_prompts_ranked:  17%|█▋        | 34/200 [04:25<26:08,  9.45s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 35/200 [04:32<23:43,  8.63s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 36/200 [04:43<25:23,  9.29s/it]Dataset: data-is-better-together/10k_prompts_ranked:  18%|█▊        | 37/200 [04:53<26:05,  9.60s/it]Dataset: data-is-better-together/10k_prompts_ranked:  19%|█▉        | 38/200 [05:04<27:02, 10.02s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|█▉        | 39/200 [05:06<20:39,  7.70s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|██        | 40/200 [05:14<20:25,  7.66s/it]Dataset: data-is-better-together/10k_prompts_ranked:  20%|██        | 41/200 [05:18<17:33,  6.63s/it]Dataset: data-is-better-together/10k_prompts_ranked:  21%|██        | 42/200 [05:29<20:55,  7.95s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▏       | 43/200 [05:34<18:05,  6.91s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▏       | 44/200 [05:44<20:57,  8.06s/it]Dataset: data-is-better-together/10k_prompts_ranked:  22%|██▎       | 45/200 [05:52<20:44,  8.03s/it]Dataset: data-is-better-together/10k_prompts_ranked:  23%|██▎       | 46/200 [05:55<16:02,  6.25s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▎       | 47/200 [05:55<11:54,  4.67s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▍       | 48/200 [05:58<10:13,  4.04s/it]Dataset: data-is-better-together/10k_prompts_ranked:  24%|██▍       | 49/200 [06:08<14:55,  5.93s/it]Dataset: data-is-better-together/10k_prompts_ranked:  25%|██▌       | 50/200 [06:19<18:26,  7.38s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▌       | 51/200 [06:20<13:48,  5.56s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▌       | 52/200 [06:31<17:10,  6.96s/it]Dataset: data-is-better-together/10k_prompts_ranked:  26%|██▋       | 53/200 [06:34<14:36,  5.96s/it]Dataset: data-is-better-together/10k_prompts_ranked:  27%|██▋       | 54/200 [06:38<12:39,  5.20s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 55/200 [06:38<09:09,  3.79s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 56/200 [06:41<08:02,  3.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  28%|██▊       | 57/200 [06:51<13:16,  5.57s/it]Dataset: data-is-better-together/10k_prompts_ranked:  29%|██▉       | 58/200 [06:51<09:19,  3.94s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|██▉       | 59/200 [06:59<12:00,  5.11s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|███       | 60/200 [07:10<15:54,  6.82s/it]Dataset: data-is-better-together/10k_prompts_ranked:  30%|███       | 61/200 [07:11<11:47,  5.09s/it]Dataset: data-is-better-together/10k_prompts_ranked:  31%|███       | 62/200 [07:18<12:47,  5.56s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▏      | 63/200 [07:29<16:13,  7.11s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▏      | 64/200 [07:31<12:52,  5.68s/it]Dataset: data-is-better-together/10k_prompts_ranked:  32%|███▎      | 65/200 [07:41<15:32,  6.91s/it]Dataset: data-is-better-together/10k_prompts_ranked:  33%|███▎      | 66/200 [07:46<14:29,  6.49s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▎      | 67/200 [07:49<11:46,  5.31s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▍      | 68/200 [07:55<12:16,  5.58s/it]Dataset: data-is-better-together/10k_prompts_ranked:  34%|███▍      | 69/200 [07:56<09:03,  4.15s/it]Dataset: data-is-better-together/10k_prompts_ranked:  35%|███▌      | 70/200 [07:57<06:52,  3.17s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▌      | 71/200 [07:58<05:26,  2.53s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▌      | 72/200 [08:02<06:21,  2.98s/it]Dataset: data-is-better-together/10k_prompts_ranked:  36%|███▋      | 73/200 [08:07<07:50,  3.71s/it]Dataset: data-is-better-together/10k_prompts_ranked:  37%|███▋      | 74/200 [08:17<11:27,  5.46s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 75/200 [08:28<14:44,  7.08s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 76/200 [08:38<16:56,  8.20s/it]Dataset: data-is-better-together/10k_prompts_ranked:  38%|███▊      | 77/200 [08:45<16:02,  7.83s/it]Dataset: data-is-better-together/10k_prompts_ranked:  39%|███▉      | 78/200 [08:47<12:17,  6.05s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|███▉      | 79/200 [08:58<15:05,  7.48s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|████      | 80/200 [09:06<14:58,  7.49s/it]Dataset: data-is-better-together/10k_prompts_ranked:  40%|████      | 81/200 [09:16<16:49,  8.48s/it]Dataset: data-is-better-together/10k_prompts_ranked:  41%|████      | 82/200 [09:19<13:09,  6.69s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▏     | 83/200 [09:20<09:36,  4.93s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▏     | 84/200 [09:24<09:16,  4.80s/it]Dataset: data-is-better-together/10k_prompts_ranked:  42%|████▎     | 85/200 [09:30<09:52,  5.16s/it]Dataset: data-is-better-together/10k_prompts_ranked:  43%|████▎     | 86/200 [09:41<13:11,  6.94s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▎     | 87/200 [09:52<15:14,  8.10s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▍     | 88/200 [10:01<15:20,  8.22s/it]Dataset: data-is-better-together/10k_prompts_ranked:  44%|████▍     | 89/200 [10:11<16:37,  8.99s/it]Dataset: data-is-better-together/10k_prompts_ranked:  45%|████▌     | 90/200 [10:22<17:29,  9.54s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▌     | 91/200 [10:24<13:21,  7.35s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▌     | 92/200 [10:33<13:38,  7.58s/it]Dataset: data-is-better-together/10k_prompts_ranked:  46%|████▋     | 93/200 [10:37<11:35,  6.50s/it]Dataset: data-is-better-together/10k_prompts_ranked:  47%|████▋     | 94/200 [10:43<11:14,  6.36s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 95/200 [10:44<08:34,  4.90s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 96/200 [10:50<09:00,  5.19s/it]Dataset: data-is-better-together/10k_prompts_ranked:  48%|████▊     | 97/200 [10:54<08:09,  4.75s/it]Dataset: data-is-better-together/10k_prompts_ranked:  49%|████▉     | 98/200 [11:04<11:09,  6.56s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|████▉     | 99/200 [11:12<11:31,  6.84s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|█████     | 100/200 [11:12<08:05,  4.85s/it]Dataset: data-is-better-together/10k_prompts_ranked:  50%|█████     | 101/200 [11:23<10:55,  6.62s/it]Dataset: data-is-better-together/10k_prompts_ranked:  51%|█████     | 102/200 [11:30<10:53,  6.66s/it]Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▏    | 103/200 [11:37<10:54,  6.75s/it]Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▏    | 104/200 [11:48<12:52,  8.05s/it]Token indices sequence length is longer than the specified maximum sequence length for this model (3654 > 2048). Running this sequence through the model will result in indexing errors
+Dataset: data-is-better-together/10k_prompts_ranked:  52%|█████▏    | 104/200 [11:48<10:53,  6.81s/it]
+Average accept_length: 1.402438998222351
+Average accept_length: 1.28515625
+Average accept_length: 1.53515625
+Average accept_length: 1.2831858396530151
+Average accept_length: 1.524271845817566
+Average accept_length: 1.18359375
+Average accept_length: 1.6035242080688477
+Average accept_length: 1.0512820482254028
+Average accept_length: 1.93359375
+Average accept_length: 1.5263158082962036
+Average accept_length: 1.3648649454116821
+Average accept_length: 0.6774193048477173
+Average accept_length: 0.9333333373069763
+Average accept_length: 1.69140625
+Average accept_length: 1.713592290878296
+Average accept_length: 1.21875
+Average accept_length: 1.4609375
+Average accept_length: 1.2698413133621216
+Average accept_length: 1.1461988687515259
+Average accept_length: 0.9756097197532654
+Average accept_length: 1.2447552680969238
+Average accept_length: 1.4803149700164795
+Average accept_length: 1.2010308504104614
+Average accept_length: 1.0859375
+Average accept_length: 1.326241135597229
+Average accept_length: 1.3203125
+Average accept_length: 2.127659559249878
+Average accept_length: 1.37109375
+Average accept_length: 1.1626015901565552
+Average accept_length: 1.4505494832992554
+Average accept_length: 1.3021583557128906
+Average accept_length: 1.15234375
+Average accept_length: 1.40625
+Average accept_length: 1.4765625
+Average accept_length: 1.25
+Average accept_length: 1.3359375
+Average accept_length: 1.4959349632263184
+Average accept_length: 1.46484375
+Average accept_length: 0.3999999761581421
+Average accept_length: 1.5027624368667603
+Average accept_length: 1.2352941036224365
+Average accept_length: 1.15625
+Average accept_length: 1.0458714962005615
+Average accept_length: 1.16796875
+Average accept_length: 2.0684211254119873
+Average accept_length: 2.4800000190734863
+Average accept_length: 1.2608696222305298
+Average accept_length: 1.2903225421905518
+Average accept_length: 1.3117408752441406
+Average accept_length: 1.4375
+Average accept_length: 1.6451612710952759
+Average accept_length: 2.320833444595337
+Average accept_length: 1.0227272510528564
+Average accept_length: 1.518072247505188
+Average accept_length: 0.8181818723678589
+Average accept_length: 1.7857143878936768
+Average accept_length: 1.21484375
+Average accept_length: 0.5
+Average accept_length: 1.4255318641662598
+Average accept_length: 1.140625
+Average accept_length: 2.0399999618530273
+Average accept_length: 1.1304347515106201
+Average accept_length: 1.2265625
+Average accept_length: 1.6315789222717285
+Average accept_length: 1.2290748357772827
+Average accept_length: 0.9906541705131531
+Average accept_length: 2.271186351776123
+Average accept_length: 2.054054021835327
+Average accept_length: 1.3684210777282715
+Average accept_length: 1.7142857313156128
+Average accept_length: 1.4166667461395264
+Average accept_length: 1.2680412530899048
+Average accept_length: 1.2538461685180664
+Average accept_length: 1.2850877046585083
+Average accept_length: 1.4609375
+Average accept_length: 1.828125
+Average accept_length: 1.3674697875976562
+Average accept_length: 1.2173913717269897
+Average accept_length: 1.25
+Average accept_length: 2.090909242630005
+Average accept_length: 1.30078125
+Average accept_length: 0.9180327653884888
+Average accept_length: 1.6842105388641357
+Average accept_length: 1.3302751779556274
+Average accept_length: 1.3055555820465088
+Average accept_length: 1.5803922414779663
+Average accept_length: 1.421875
+Average accept_length: 1.75
+Average accept_length: 1.3671875
+Average accept_length: 1.76171875
+Average accept_length: 2.129629611968994
+Average accept_length: 1.3282052278518677
+Average accept_length: 2.0208334922790527
+Average accept_length: 1.3793103694915771
+Average accept_length: 1.4571428298950195
+Average accept_length: 1.1619718074798584
+Average accept_length: 1.2222222089767456
+Average accept_length: 1.50390625
+Average accept_length: 1.1277778148651123
+Average accept_length: 1.5
+Average accept_length: 1.453125
+Average accept_length: 1.3625000715255737
+Average accept_length: 1.0892857313156128
+Average accept_length: 1.73828125
+Traceback (most recent call last):
+  File "/home/ubuntu/sd/HandEval/test_p2.py", line 163, in <module>
+    main(args)
+  File "/home/ubuntu/sd/HandEval/test_p2.py", line 147, in main
+    metrics = evaluate_dataset(model, args)
+  File "/home/ubuntu/sd/HandEval/test_p2.py", line 106, in evaluate_dataset
+    completion = model.generate(prompt, max_steps=getattr(args, "max_new_tokens", 256))
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/ubuntu/sd/HandEval/models/medusa_wrapper.py", line 64, in generate
+    return m_generate(
+  File "/home/ubuntu/sd/HandEval/models/medusa_wrapper.py", line 22, in m_generate
+    for chunk in gen_iter:
+  File "/home/ubuntu/sd/Medusa/medusa/model/medusa_model.py", line 307, in medusa_generate
+    medusa_logits, logits = initialize_medusa(
+  File "/home/ubuntu/sd/Medusa/medusa/model/utils.py", line 146, in initialize_medusa
+    medusa_logits, outputs, logits = model(
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/sd/Medusa/medusa/model/medusa_model.py", line 204, in forward
+    outputs = self.base_model.model(
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/sd/Medusa/medusa/model/modeling_llama_kv.py", line 930, in forward
+    layer_outputs = decoder_layer(
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/sd/Medusa/medusa/model/modeling_llama_kv.py", line 625, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/miniconda3/envs/sd/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/sd/Medusa/medusa/model/modeling_llama_kv.py", line 363, in forward
+    attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.29 GiB. GPU 0 has a total capacity of 79.10 GiB of which 899.75 MiB is free. Including non-PyTorch memory, this process has 78.21 GiB memory in use. Of the allocated memory 76.84 GiB is allocated by PyTorch, and 729.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
